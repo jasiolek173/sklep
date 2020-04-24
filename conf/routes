@@ -1,16 +1,89 @@
 
 # Routes
 # This file defines all application routes (Higher priority routes first)
-# ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
-# An example controller showing how to use dependency injection
-GET     /count                      controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET     /message                    controllers.AsyncController.message
+GET           /                         controllers.HomeController.index
+
+#Product
+GET           /products/:id             controllers.ProductController.getProductWithId(id: Long)
+POST          /products                 controllers.ProductController.createProduct
+GET           /products                 controllers.ProductController.getAllProducts
+DELETE        /products/:id             controllers.ProductController.removeProductWithId(id: Long)
+POST          /productshandle           controllers.ProductController.createProductForm
+PUT           /productshandle           controllers.ProductController.updateProductForm
+
+#cart
+GET           /carts/:id                controllers.CartController.getCartWithId(id: Long)
+POST          /carts                    controllers.CartController.createCart
+GET           /carts                    controllers.CartController.getAllCarts
+DELETE        /carts/:id                controllers.CartController.removeCartWithId(id: Long)
+POST          /cartshandle              controllers.CartController.createCartForm
+PUT           /cartshandle              controllers.CartController.updateCartForm
+
+#category
+GET           /categories/:id           controllers.CategoryController.getCategoryWithId(id: Long)
+POST          /categories               controllers.CategoryController.createCategory
+GET           /categories               controllers.CategoryController.getAllCategories
+DELETE        /categories/:id           controllers.CategoryController.removeCategoryWithId(id: Long)
+POST          /categorieshandle         controllers.CategoryController.createCategoryForm
+PUT           /categorieshandle         controllers.CategoryController.updateCategoryForm
+
+#comment
+GET           /comments/:id             controllers.CommentController.getCommentWithId(id: Long)
+POST          /comments                 controllers.CommentController.createComment
+GET           /comments                 controllers.CommentController.getAllComments
+DELETE        /comments/:id             controllers.CommentController.removeCommentWithId(id: Long)
+POST          /commentshandle           controllers.CommentController.createCommentForm
+PUT           /commentshandle           controllers.CommentController.updateCommentForm
+
+#order
+GET           /orders/:id               controllers.OrderController.getOrderWithId(id: Long)
+POST          /orders                   controllers.OrderController.createOrder
+GET           /orders                   controllers.OrderController.getAllOrders
+DELETE        /orders/:id               controllers.OrderController.removeOrderWithId(id: Long)
+POST          /ordershandle             controllers.OrderController.createOrderForm
+PUT           /ordershandle             controllers.OrderController.updateOrderForm
+
+#payment
+GET           /payments/:id             controllers.PaymentController.getPaymentWithId(id: Long)
+POST          /payments                 controllers.PaymentController.createPayment
+GET           /payments                 controllers.PaymentController.getAllPayments
+DELETE        /payments/:id             controllers.PaymentController.removePaymentWithId(id: Long)
+POST          /paymentshandle           controllers.PaymentController.createPaymentForm
+PUT           /paymentshandle           controllers.PaymentController.updatePaymentForm
+
+#account
+GET           /accounts/:id             controllers.AccountController.getAccountWithId(id: Long)
+POST          /accounts                 controllers.AccountController.createAccount
+GET           /accounts                 controllers.AccountController.getAllAccounts
+DELETE        /accounts/:id             controllers.AccountController.removeAccountWithId(id: Long)
+POST          /accountshandle           controllers.AccountController.createAccountForm
+PUT           /accountshandle           controllers.AccountController.updateAccountForm
+
+#shipmentType
+GET           /shipmenttypes/:id        controllers.ShipmentTypeController.getShipmentTypeWithId(id: Long)
+POST          /shipmenttypes            controllers.ShipmentTypeController.createShipmentType
+GET           /shipmenttypes            controllers.ShipmentTypeController.getAllShipmentTypes
+DELETE        /shipmenttypes/:id        controllers.ShipmentTypeController.removeShipmentTypeWithId(id: Long)
+
+#paymentType
+GET           /paymenttypes/:id         controllers.PaymentTypeController.getPaymentTypeWithId(id: Long)
+POST          /paymenttypes             controllers.PaymentTypeController.createPaymentType
+GET           /paymenttypes             controllers.PaymentTypeController.getAllPaymentTypes
+DELETE        /paymenttypes/:id         controllers.PaymentTypeController.removePaymentTypeWithId(id: Long)
+
+#coupon
+GET           /coupons/:id                controllers.CouponController.getCouponWithId(id: Long)
+POST          /coupons                    controllers.CouponController.createCoupon
+GET           /coupons                    controllers.CouponController.getAllCoupons
+DELETE        /coupons/:id                controllers.CouponController.removeCouponWithId(id: Long)
+POST          /couponshandle              controllers.CouponController.createCouponForm
+PUT           /couponshandle              controllers.CouponController.updateCouponForm
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+GET           /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)
 
-      
+
+
+
