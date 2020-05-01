@@ -13,13 +13,13 @@ DELETE        /products/:id             controllers.ProductController.removeProd
 POST          /productshandle           controllers.ProductController.createProductForm
 PUT           /productshandle           controllers.ProductController.updateProductForm
 
-#cart
-GET           /carts/:id                controllers.CartController.getCartWithId(id: Long)
-POST          /carts                    controllers.CartController.createCart
-GET           /carts                    controllers.CartController.getAllCarts
-DELETE        /carts/:id                controllers.CartController.removeCartWithId(id: Long)
-POST          /cartshandle              controllers.CartController.createCartForm
-PUT           /cartshandle              controllers.CartController.updateCartForm
+#brand
+GET           /brands/:id               controllers.BrandController.getBrandWithId(id:Int)
+POST          /brands                   controllers.BrandController.createBrand
+GET           /brands                   controllers.BrandController.getAllBrands
+DELETE        /brands/:id               controllers.BrandController.removeBrandWithId(id: Int)
+POST          /brandsHandle             controllers.BrandController.createBrandForm
+PUT           /brandsHandle             controllers.BrandController.updateBrandForm
 
 #category
 GET           /categories/:id           controllers.CategoryController.getCategoryWithId(id: Long)
@@ -74,12 +74,12 @@ GET           /paymenttypes             controllers.PaymentTypeController.getAll
 DELETE        /paymenttypes/:id         controllers.PaymentTypeController.removePaymentTypeWithId(id: Long)
 
 #coupon
-GET           /coupons/:id                controllers.CouponController.getCouponWithId(id: Long)
-POST          /coupons                    controllers.CouponController.createCoupon
-GET           /coupons                    controllers.CouponController.getAllCoupons
-DELETE        /coupons/:id                controllers.CouponController.removeCouponWithId(id: Long)
-POST          /couponshandle              controllers.CouponController.createCouponForm
-PUT           /couponshandle              controllers.CouponController.updateCouponForm
+GET           /coupons/:id              controllers.CouponController.getCouponWithId(id: Long)
+POST          /coupons                  controllers.CouponController.createCoupon
+GET           /coupons                  controllers.CouponController.getAllCoupons
+DELETE        /coupons/:id              controllers.CouponController.removeCouponWithId(id: Long)
+POST          /couponshandle            controllers.CouponController.createCouponForm
+PUT           /couponshandle            controllers.CouponController.updateCouponForm
 
 # Map static resources from the /public folder to the /assets URL path
 GET           /assets/*file             controllers.Assets.versioned(path="/public", file: Asset)

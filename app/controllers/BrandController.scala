@@ -4,29 +4,28 @@ import javax.inject.{Inject, Singleton}
 import play.api.mvc.{AbstractController, ControllerComponents}
 
 @Singleton
-class CartController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
-
-  def getCartWithId(id: Long) = Action {
+class BrandController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+  def getBrandWithId(id: Int) = Action {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def createCart = Action {
+  def createBrand = Action {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def getAllCarts = Action {
+  def getAllBrands = Action {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def removeCartWithId(id: Long) = Action {
+  def removeBrandWithId(id: Int) = Action {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def createCartForm= Action {
+  def createBrandForm= Action {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def updateCartForm = Action {
+  def updateBrandForm = Action {
     Ok(views.html.index("Your new application is ready."))
   }
 }
