@@ -17,6 +17,12 @@ class ProductRepository @Inject()(dbConfigProvider: DatabaseConfigProvider, cate
 
   private val product = TableQuery[ProductTable]
 
+  def createProduct(name: String, description: String, category: Int, brand: Int, price: BigDecimal, imgUrl: String): Future[Product] = db.run {
+    (product.map(p => (p.name, p.description, p.category, p.brand, p.price, p.image_url))
+      returning product.map(_.id)
+      into { case ((name, description, category, brand, price, imgUrl), id) => Product(id, name, description, category, brand, price, imgUrl) }
+      ) += (name, description, category, brand, price, imgUrl)
+  }
 
   def list(): Future[Seq[Product]] = db.run {
     product.result

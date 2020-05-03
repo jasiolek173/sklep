@@ -1,0 +1,22 @@
+@(payments: Seq[Payment])
+<a href="@controllers.routes.PaymentController.createPaymentForm()">Add payment</a>
+<table>
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">amount</th>
+        <th style="padding: 15px;">order ID</th>
+        <th style="padding: 15px;">actions</th>
+    </tr>
+    @for(payment <- payments) {
+        <tr>
+            <td style="padding: 15px;">@payment.id</td>
+            <td style="padding: 15px;">@payment.amount</td>
+            <td style="padding: 15px;">@payment.order</td>
+            <td style="padding: 15px;">
+                <a href="@controllers.routes.PaymentController.getPaymentWithId(payment.id)">CHECK</a>
+                <a href="@controllers.routes.PaymentController.updatePaymentForm(payment.id)">EDIT</a>
+                <a href="@controllers.routes.PaymentController.removePaymentWithId(payment.id)">REMOVE</a>
+            </td>
+        </tr>
+    }
+</table>

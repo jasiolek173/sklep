@@ -1,0 +1,6 @@
+@(brand: Brand)
+<h1>@brand.name</h1>
+
+<a href="@controllers.routes.BrandController.">Back to all brands</a>
+<a href="@controllers.routes.BrandController.updateBrandForm(brand.id)">Edit brand</a>
+<a href="@controllers.routes.BrandController.removeBrandWithId(brand.id)">Remove brand</a>

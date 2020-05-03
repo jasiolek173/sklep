@@ -1,0 +1,30 @@
+@(products: Seq[Product])
+<a href="@controllers.routes.ProductController.createProductForm()">ADD NEW PRODUCT</a>
+<table style="width: 100%">
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">name</th>
+        <th style="padding: 15px;">description</th>
+        <th style="padding: 15px;">price</th>
+        <th style="padding: 15px;">image url</th>
+        <th style="padding: 15px;">brand id</th>
+        <th style="padding: 15px;">category id</th>
+        <th style="padding: 15px;">actions</th>
+    </tr>
+    @for(product <- products) {
+        <tr>
+            <td style="padding: 15px;">@product.id</td>
+            <td style="padding: 15px;">@product.name</td>
+            <td style="padding: 15px;">@product.description</td>
+            <td style="padding: 15px;">@product.price</td>
+            <td style="padding: 15px;">@product.imageUrl</td>
+            <td style="padding: 15px;">@product.brand</td>
+            <td style="padding: 15px;">@product.category</td>
+            <td style="padding: 15px;">
+                <a href="@controllers.routes.ProductController.getProductWithId(product.id)">CHECK</a>
+                <a href="@controllers.routes.ProductController.updateProductForm(product.id)">EDIT</a>
+                <a href="@controllers.routes.ProductController.removeProductWithId(product.id)">REMOVE</a>
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,20 @@
+@(categories: Seq[Category])
+<a href="@controllers.routes.CategoryController.createCategoryForm()">Add category</a>
+<table>
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">name</th>
+        <th style="padding: 15px;">actions</th>
+    </tr>
+    @for(category <- categories) {
+        <tr>
+            <td style="padding: 15px;">@category.id</td>
+            <td style="padding: 15px;">@category.name</td>
+            <td style="padding: 15px;">
+                <a href="@controllers.routes.CategoryController.getCategoryWithId(category.id)">CHECK</a>
+                <a href="@controllers.routes.CategoryController.updateCategoryForm(category.id)">EDIT</a>
+                <a href="@controllers.routes.CategoryController.removeCategoryWithId(category.id)">REMOVE</a>
+            </td>
+        </tr>
+    }
+</table>

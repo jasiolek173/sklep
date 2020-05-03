@@ -1,0 +1,6 @@
+@(account: Account)
+<h1>@account.login</h1>
+
+<a href="@controllers.routes.AccountController.getAllAccounts()">Back to all accounts</a>
+<a href="@controllers.routes.AccountController.updateAccountForm(account.id)">Edit account</a>
+<a href="@controllers.routes.AccountController.removeAccountWithId(account.id)">Remove account</a>

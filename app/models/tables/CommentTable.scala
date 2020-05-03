@@ -6,7 +6,7 @@ import slick.jdbc.SQLiteProfile.api._
 class CommentTable(tag: Tag) extends Table[Comment](tag, "comment") {
   val prod = TableQuery[ProductTable]
 
-  def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
+  def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
   def owner = column[String]("owner")
 

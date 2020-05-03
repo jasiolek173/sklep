@@ -2,14 +2,14 @@ package repositories
 
 import javax.inject.{Inject, Singleton}
 import models.Category
-import play.api.db.slick.DatabaseConfigProvider
 import models.tables.CategoryTable
+import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class CategoryRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
+class CategoryRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
   val dbConfig = dbConfigProvider.get[JdbcProfile]
 
   import dbConfig._
@@ -27,5 +27,21 @@ class CategoryRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(im
   def list(): Future[Seq[Category]] = db.run {
     category.result
   }
+
+  def getById(id: Int): Future[Category] = db.run {
+    category.filter(_.id === id).result.head
+  }
+
+  def getByIdOption(id: Int): Future[Option[Category]] = db.run {
+    category.filter(_.id === id).result.headOption
+  }
+
+  def delete(id: Int): Future[Unit] = db.run(category.filter(_.id === id).delete).map(_ => ())
+
+  def update(id: Int, newCategory: Category): Future[Unit] = {
+    val categoryToUpdate: Category = newCategory.copy(id)
+    db.run(category.filter(_.id === id).update(categoryToUpdate)).map(_ => ())
+  }
+
 }
 

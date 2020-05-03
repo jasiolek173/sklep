@@ -1,0 +1,7 @@
+@(payment: Payment)
+<h1>@payment.amount</h1>
+<h1>ORDER ID: @payment.order</h1>
+
+<a href="@controllers.routes.PaymentController.getAllPayments()">Back to all payments</a>
+<a href="@controllers.routes.PaymentController.updatePaymentForm(payment.id)">Edit payment</a>
+<a href="@controllers.routes.PaymentController.removePaymentWithId(payment.id)">Remove payment</a>

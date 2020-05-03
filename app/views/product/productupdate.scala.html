@@ -1,0 +1,40 @@
+@(product: Form[Product], category: Seq[Category], brands: Seq[Brand])(implicit request: MessagesRequestHeader, flash: Flash)
+
+    @import helper._
+
+    @flash.get("success").getOrElse("")
+
+    @form(routes.ProductController.updateProduct()) {
+        @helper.CSRF.formField
+        <input name="id" id="id" value="@product("id").value" type="hidden" />
+        @inputText(product("name"))
+        @inputText(product("description"))
+        @inputText(product("imageUrl"))
+        @inputText(product("price"))
+        <select name="category" id="category">
+        @for(cat <- category) {
+            @if(cat.id.toString == product("category").value.getOrElse(0)) {
+                <option value="@cat.id" selected>@cat.name</option>
+            } else {
+                <option value="@cat.id">@cat.name</option>
+            }
+
+        }
+        </select>
+
+        <select name="brand" id="brand">
+        @for(brand <- brands) {
+            @if(brand.id.toString == product("brand").value.getOrElse(0)) {
+                <option value="@brand.id" selected>@brand.name</option>
+            } else {
+                <option value="@brand.id">@brand.name</option>
+            }
+
+        }
+        </select>
+
+        <div class="buttons">
+            <input type="submit" value="Update Product"/>
+        </div>
+        <a href="@controllers.routes.ProductController.getAllProducts()">Back to all products</a>
+    }

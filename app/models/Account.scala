@@ -17,6 +17,16 @@ object AccountForm {
   }
 }
 
+object UpdateAccountForm {
+  val form: Form[Account] = Form {
+    mapping(
+      "id" -> number,
+      "login" -> nonEmptyText,
+      "password" -> nonEmptyText
+    )(Account.apply)(Account.unapply)
+  }
+}
+
 object Account {
   implicit val accountFormat = Json.format[Account]
 }

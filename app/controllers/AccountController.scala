@@ -1,32 +1,72 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.mvc.{AbstractController, ControllerComponents}
+import models.{Account, AccountForm, UpdateAccountForm}
+import play.api.mvc._
+import repositories.AccountRepository
+
+import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class AccountController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class AccountController @Inject()(accountRepository: AccountRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
 
-  def getAccountWithId(id: Long) = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def getAccountWithId(id: Int): Action[AnyContent] = Action.async { implicit request =>
+    accountRepository.getByIdOption(id).map {
+      case Some(p) => Ok(views.html.account.account(p))
+      case None => Redirect(routes.AccountController.getAllAccounts())
+    }
   }
 
-  def createAccount = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def getAllAccounts: Action[AnyContent] = Action.async { implicit request =>
+    accountRepository.list().map(accounts => Ok(views.html.account.accounts(accounts)))
   }
 
-  def getAllAccounts = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def removeAccountWithId(id: Int): Action[AnyContent] = Action {
+    accountRepository.delete(id)
+    Redirect("/get_accounts")
   }
 
-  def removeAccountWithId(id: Long) = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def createAccount: Action[AnyContent] = Action.async { implicit request =>
+    AccountForm.form.bindFromRequest.fold(errorForm => {
+      Future.successful(
+        BadRequest(views.html.account.accountadd(errorForm))
+      )
+    },
+      account => {
+        accountRepository.create(account.login, account.password).map { _ =>
+          Redirect(routes.AccountController.createAccountForm()).flashing("success" -> "account.created")
+        }
+      }
+    )
   }
 
-  def createAccountForm = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def createAccountForm: Action[AnyContent] = Action { implicit request: MessagesRequest[AnyContent] =>
+    Ok(views.html.account.accountadd(AccountForm.form))
   }
 
-  def updateAccountForm = Action {
-    Ok(views.html.index("Your new application is ready."))
+  def updateAccount(): Action[AnyContent] = Action.async { implicit request =>
+    UpdateAccountForm.form.bindFromRequest.fold(
+      errorForm => {
+        Future.successful(
+          BadRequest(views.html.account.accountupdate(errorForm))
+        )
+      },
+      account => {
+        accountRepository.update(account.id, Account(account.id, account.login, account.password)).map { _ =>
+          Redirect(routes.AccountController.updateAccountForm(account.id)).flashing("success" -> "account updated")
+        }
+      }
+    )
+  }
+
+  def updateAccountForm(id: Int): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
+    accountRepository.getByIdOption(id).map {
+      case Some(p) =>
+        val prodForm = UpdateAccountForm.form.fill(Account(p.id, p.login, p.password))
+        Ok(views.html.account.accountupdate(prodForm))
+      case None =>
+        Redirect(routes.AccountController.getAllAccounts())
+    }
   }
 }
+

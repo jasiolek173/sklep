@@ -9,11 +9,21 @@ case class PaymentType(id: Int, name: String, description: String)
 case class PaymentTypeFormData(name: String, description: String)
 
 object PaymentTypeForm {
-  val from: Form[PaymentTypeFormData] = Form {
+  val form: Form[PaymentTypeFormData] = Form {
     mapping(
       "name" -> nonEmptyText,
       "description" -> nonEmptyText
     )(PaymentTypeFormData.apply)(PaymentTypeFormData.unapply)
+  }
+}
+
+object UpdatePaymentTypeForm {
+  val form: Form[PaymentType] = Form {
+    mapping(
+      "id" -> number,
+      "name" -> nonEmptyText,
+      "description" -> nonEmptyText
+    )(PaymentType.apply)(PaymentType.unapply)
   }
 }
 

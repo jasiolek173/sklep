@@ -1,0 +1,24 @@
+@(comments: Seq[Comment])
+<a href="@controllers.routes.CommentController.createCommentForm()">Add comment</a>
+<table>
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">owner</th>
+        <th style="padding: 15px;">content</th>
+        <th style="padding: 15px;">product ID</th>
+        <th style="padding: 15px;">actions</th>
+    </tr>
+    @for(comment <- comments) {
+        <tr>
+            <td style="padding: 15px;">@comment.id</td>
+            <td style="padding: 15px;">@comment.owner</td>
+            <td style="padding: 15px;">@comment.content</td>
+            <td style="padding: 15px;">@comment.product</td>
+            <td style="padding: 15px;">
+                <a href="@controllers.routes.CommentController.getCommentWithId(comment.id)">CHECK</a>
+                <a href="@controllers.routes.CommentController.updateCommentForm(comment.id)">EDIT</a>
+                <a href="@controllers.routes.CommentController.removeCommentWithId(comment.id)">REMOVE</a>
+            </td>
+        </tr>
+    }
+</table>

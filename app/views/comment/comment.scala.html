@@ -1,0 +1,7 @@
+@(comment: Comment)
+<h1>@comment.product</h1>
+<h2>@comment.owner</h2>
+<p>@comment.content</p>
+<a href="@controllers.routes.CommentController.getAllComments()">Back to all comments</a>
+<a href="@controllers.routes.CommentController.updateCommentForm(comment.id)">Edit comment</a>
+<a href="@controllers.routes.CommentController.removeCommentWithId(comment.id)">Remove comment</a>

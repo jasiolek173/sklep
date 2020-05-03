@@ -1,0 +1,11 @@
+@(product: Product)
+<h1>@product.name</h1>
+<p>
+    <img src="@product.imageUrl" style="float: left">
+    @product.price <br>
+@product.description
+</p>
+
+<a href="@controllers.routes.ProductController.getAllProducts()">Back to all products</a>
+<a href="@controllers.routes.ProductController.updateProductForm(product.id)">Edit product</a>
+<a href="@controllers.routes.ProductController.removeProductWithId(product.id)">Remove product</a>

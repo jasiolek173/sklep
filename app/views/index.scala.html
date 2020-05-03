@@ -1,20 +1,28 @@
 @*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
+* This template takes a single argument, a String containing a
+* message to display.
+*@
 @(message: String)
-
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Welcome to Play") {
-
     @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @welcome(message, style = "scala")
-
-}
+    * Call the `main` template with two arguments. The first
+    * argument is a `String` with the title of the page, the second
+    * argument is an `Html` object containing the body of the page.
+    *@
+    @main("Welcome to Play") {
+        @*
+        * Get an `Html` object by calling the built-in Play welcome
+        * template and passing a `String` message @welcome(message, style = "scala")
+        *@
+        <ul>
+            <li><a href="@controllers.routes.AccountController.getAllAccounts()">accounts</a></li>
+            <li><a href="@controllers.routes.BrandController.getAllBrands()">brands</a></li>
+            <li><a href="@controllers.routes.CategoryController.getAllCategories()">categories</a></li>
+            <li><a href="@controllers.routes.CommentController.getAllComments()">comments</a></li>
+            <li><a href="@controllers.routes.CouponController.getAllCoupons()">coupons</a></li>
+            <li><a href="@controllers.routes.OrderController.getAllOrders()">orders</a></li>
+            <li><a href="@controllers.routes.PaymentController.getAllPayments()">payments</a></li>
+            <li><a href="@controllers.routes.PaymentTypeController.getAllPaymentTypes()">payment types</a></li>
+            <li><a href="@controllers.routes.ProductController.getAllProducts()">products</a></li>
+            <li><a href="@controllers.routes.ShipmentTypeController.getAllShipmentTypes()">shipment types</a></li>
+        </ul>
+    }

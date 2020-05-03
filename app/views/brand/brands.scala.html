@@ -1,0 +1,20 @@
+@(brands: Seq[Brand])
+<a href="@controllers.routes.BrandController.createBrandForm()">Add brand</a>
+<table>
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">name</th>
+        <th style="padding: 15px;">actions</th>
+    </tr>
+    @for(brand <- brands) {
+        <tr>
+            <td style="padding: 15px;">@brand.id</td>
+            <td style="padding: 15px;">@brand.name</td>
+            <td style="padding: 15px;">
+                <a href="@controllers.routes.BrandController.getBrandWithId(brand.id)">CHECK</a>
+                <a href="@controllers.routes.BrandController.updateBrandForm(brand.id)">EDIT</a>
+                <a href="@controllers.routes.BrandController.removeBrandWithId(brand.id)">REMOVE</a>
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,8 @@
+@(coupon: Coupon)
+<h1>@coupon.name</h1>
+<h2>@coupon.description</h2>
+<p>@coupon.percentage</p>
+
+<a href="@controllers.routes.CouponController.getAllCoupons()">Back to all coupons</a>
+<a href="@controllers.routes.CouponController.updateCouponForm(coupon.id)">Edit coupon</a>
+<a href="@controllers.routes.CouponController.removeCouponWithId(coupon.id)">Remove coupon</a>

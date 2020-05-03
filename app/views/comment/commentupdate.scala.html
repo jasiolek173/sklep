@@ -1,0 +1,27 @@
+@(comment: Form[Comment], products: Seq[Product])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.CommentController.updateComment()) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@comment("id").value" type="hidden" />
+    @inputText(comment("owner"))
+    @inputText(comment("content"))
+    <select name="product" id="product">
+    @for(product <- products) {
+        @if(product.id.toString == comment("product").value.getOrElse(0)) {
+            <option value="@product.id" selected>@product.name</option>
+        } else {
+            <option value="@product.id">@product.name</option>
+        }
+
+    }
+    </select>
+
+    <div class="buttons">
+        <input type="submit" value="Update Comment"/>
+    </div>
+    <a href="@controllers.routes.CommentController.getAllComments()">Back to all comments</a>
+}

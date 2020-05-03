@@ -1,0 +1,24 @@
+@(shipmentTypes: Seq[ShipmentType])
+<a href="@controllers.routes.ShipmentTypeController.createShipmentTypeForm()">Add shipmentType</a>
+<table>
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">name</th>
+        <th style="padding: 15px;">description</th>
+        <th style="padding: 15px;">price</th>
+        <th style="padding: 15px;">actions</th>
+    </tr>
+    @for(shipmentType <- shipmentTypes) {
+        <tr>
+            <td style="padding: 15px;">@shipmentType.id</td>
+            <td style="padding: 15px;">@shipmentType.name</td>
+            <td style="padding: 15px;">@shipmentType.description</td>
+            <td style="padding: 15px;">@shipmentType.price</td>
+            <td style="padding: 15px;">
+                <a href="@controllers.routes.ShipmentTypeController.getShipmentTypeWithId(shipmentType.id)">CHECK</a>
+                <a href="@controllers.routes.ShipmentTypeController.updateShipmentTypeForm(shipmentType.id)">EDIT</a>
+                <a href="@controllers.routes.ShipmentTypeController.removeShipmentTypeWithId(shipmentType.id)">REMOVE</a>
+            </td>
+        </tr>
+    }
+</table>

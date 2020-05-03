@@ -1,0 +1,15 @@
+@(shipmentType: Form[ShipmentTypeFormData])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.ShipmentTypeController.createShipmentType) {
+    @helper.CSRF.formField
+    @inputText(shipmentType("name"))
+    @inputText(shipmentType("description"))
+    <div class="buttons">
+        <input type="submit" value="Add ShipmentType"/>
+    </div>
+    <a href="@controllers.routes.ShipmentTypeController.getAllShipmentTypes()">Back to all shipmentTypes</a>
+}

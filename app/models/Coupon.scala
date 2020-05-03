@@ -19,6 +19,17 @@ object CouponForm {
   }
 }
 
+object UpdateCouponForm {
+  val form: Form[Coupon] = Form {
+    mapping(
+      "id" -> number,
+      "name" -> nonEmptyText,
+      "description" -> nonEmptyText,
+      "percentage" -> of(doubleFormat)
+    )(Coupon.apply)(Coupon.unapply)
+  }
+}
+
 object Coupon {
   implicit val couponForm = Json.format[Coupon]
 }

@@ -1,0 +1,6 @@
+@(category: Category)
+<h1>@category.name</h1>
+
+<a href="@controllers.routes.CategoryController.getAllCategories()">Back to all categories</a>
+<a href="@controllers.routes.CategoryController.updateCategoryForm(category.id)">Edit category</a>
+<a href="@controllers.routes.CategoryController.removeCategoryWithId(category.id)">Remove category</a>

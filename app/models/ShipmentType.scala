@@ -18,6 +18,17 @@ object ShipmentTypeForm {
   }
 }
 
+object UpdateShipmentTypeForm {
+  val form: Form[ShipmentType] = Form {
+    mapping(
+      "id" -> number,
+      "name" -> nonEmptyText,
+      "description" -> nonEmptyText,
+      "price" -> bigDecimal
+    )(ShipmentType.apply)(ShipmentType.unapply)
+  }
+}
+
 object ShipmentType {
   implicit val shipmentTypeFormat = Json.format[ShipmentType]
 }

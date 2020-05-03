@@ -1,0 +1,16 @@
+@(coupon: Form[CouponFormData])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.CouponController.createCoupon) {
+    @helper.CSRF.formField
+    @inputText(coupon("name"))
+    @inputText(coupon("description"))
+    @inputText(coupon("percentage"))
+    <div class="buttons">
+        <input type="submit" value="Add Coupon"/>
+    </div>
+    <a href="@controllers.routes.CouponController.getAllCoupons()">Back to all coupons</a>
+}

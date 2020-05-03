@@ -1,0 +1,15 @@
+@(account: Form[AccountFormData])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.AccountController.createAccount) {
+    @helper.CSRF.formField
+    @inputText(account("login"))
+    @inputPassword(account("password"))
+    <div class="buttons">
+        <input type="submit" value="Add Account"/>
+    </div>
+    <a href="@controllers.routes.AccountController.getAllAccounts()">Back to all accounts</a>
+}

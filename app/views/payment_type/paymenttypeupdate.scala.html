@@ -1,0 +1,17 @@
+@(paymentType: Form[PaymentType])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.PaymentTypeController.updatePaymentType()) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@paymentType("id").value" type="hidden" />
+    @inputText(paymentType("name"))
+    @inputText(paymentType("description"))
+
+    <div class="buttons">
+        <input type="submit" value="Update PaymentType"/>
+    </div>
+    <a href="@controllers.routes.PaymentTypeController.getAllPaymentTypes()">Back to all shipment types</a>
+}

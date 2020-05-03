@@ -4,7 +4,7 @@ import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
 import play.api.libs.json.Json
 
-case class Comment(id: Long, owner: String, content: String, product: Int)
+case class Comment(id: Int, owner: String, content: String, product: Int)
 
 case class CommentFormData(owner: String, content: String, product: Int)
 
@@ -15,6 +15,17 @@ object CommentForm {
       "content" -> nonEmptyText,
       "product" -> number
     )(CommentFormData.apply)(CommentFormData.unapply)
+  }
+}
+
+object UpdateCommentForm {
+  val form: Form[Comment] = Form {
+    mapping(
+      "id" -> number,
+      "owner" -> nonEmptyText,
+      "content" -> nonEmptyText,
+      "product" -> number
+    )(Comment.apply)(Comment.unapply)
   }
 }
 

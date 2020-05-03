@@ -1,0 +1,8 @@
+@(shipmentType: ShipmentType)
+<h1>@shipmentType.name</h1>
+<h1>@shipmentType.description</h1>
+<h1>@shipmentType.price</h1>
+
+<a href="@controllers.routes.ShipmentTypeController.getAllShipmentTypes()">Back to all shipmentTypes</a>
+<a href="@controllers.routes.ShipmentTypeController.updateShipmentTypeForm(shipmentType.id)">Edit shipmentType</a>
+<a href="@controllers.routes.ShipmentTypeController.removeShipmentTypeWithId(shipmentType.id)">Remove shipmentType</a>

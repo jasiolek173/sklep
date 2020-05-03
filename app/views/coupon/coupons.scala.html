@@ -1,0 +1,24 @@
+@(coupons: Seq[Coupon])
+<a href="@controllers.routes.CouponController.createCouponForm()">Add Coupon</a>
+<table>
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">name</th>
+        <th style="padding: 15px;">description</th>
+        <th style="padding: 15px;">percentage</th>
+        <th style="padding: 15px;">actions</th>
+    </tr>
+    @for(coupon <- coupons) {
+        <tr>
+            <td style="padding: 15px;">@coupon.id</td>
+            <td style="padding: 15px;">@coupon.name</td>
+            <td style="padding: 15px;">@coupon.description</td>
+            <td style="padding: 15px;">@coupon.percentage</td>
+            <td style="padding: 15px;">
+                <a href="@controllers.routes.CouponController.getCouponWithId(coupon.id)">CHECK</a>
+                <a href="@controllers.routes.CouponController.updateCouponForm(coupon.id)">EDIT</a>
+                <a href="@controllers.routes.CouponController.removeCouponWithId(coupon.id)">REMOVE</a>
+            </td>
+        </tr>
+    }
+</table>

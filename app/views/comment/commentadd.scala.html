@@ -1,0 +1,20 @@
+@(comment: Form[CommentFormData], products: Seq[Product])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.CommentController.createComment()) {
+    @helper.CSRF.formField
+    @inputText(comment("owner"))
+    @inputText(comment("content"))
+    <select name="product" id="product">
+    @for(p <- products) {
+        <option value="@p.id">@p.name</option>
+    }
+    </select>
+    <div class="buttons">
+        <input type="submit" value="Add comment"/>
+    </div>
+    <a href="@controllers.routes.CommentController.getAllComments()">Back to all comments</a>
+}

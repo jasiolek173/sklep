@@ -1,0 +1,7 @@
+@(paymentType: PaymentType)
+<h1>@paymentType.name</h1>
+<h1>@paymentType.description</h1>
+
+<a href="@controllers.routes.PaymentTypeController.getAllPaymentTypes()">Back to all paymentTypes</a>
+<a href="@controllers.routes.PaymentTypeController.updatePaymentTypeForm(paymentType.id)">Edit paymentType</a>
+<a href="@controllers.routes.PaymentTypeController.removePaymentTypeWithId(paymentType.id)">Remove paymentType</a>

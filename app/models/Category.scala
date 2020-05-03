@@ -16,6 +16,15 @@ object CategoryForm {
   }
 }
 
+object UpdateCategoryForm {
+  val form: Form[Category] = Form {
+    mapping(
+      "id" -> number,
+      "name" -> nonEmptyText
+    )(Category.apply)(Category.unapply)
+  }
+}
+
 object Category {
   implicit val categoryFormat = Json.format[Category]
 }

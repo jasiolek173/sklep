@@ -1,0 +1,14 @@
+@(brand: Form[BrandFormData])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.BrandController.createBrand) {
+    @helper.CSRF.formField
+    @inputText(brand("name"))
+    <div class="buttons">
+        <input type="submit" value="Add Brand"/>
+    </div>
+    <a href="@controllers.routes.BrandController.getAllBrands()">Back to all brands</a>
+}
