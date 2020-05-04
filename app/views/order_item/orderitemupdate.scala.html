@@ -1,0 +1,39 @@
+@(orderItem: Form[OrderItem])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.OrderItemController.updateOrderItem()) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@orderItem("id").value" type="hidden"/>
+    <input name="order" id="order" value="@orderItem("order").value" type="hidden" />
+    <input name="name" id="name" value="@orderItem("name").value" type="hidden"/>
+    <input name="description" id="description" value="@orderItem("description").value" type="hidden"/>
+    <input name="categoryName" id="categoryName" value="@orderItem("categoryName").value" type="hidden"/>
+    <input name="brandName" id="brandName" value="@orderItem("brandName").value" type="hidden"/>
+    <input name="imageUrl" id="imageUrl" value="@orderItem("imageUrl").value" type="hidden"/>
+    Order item id: <input name="id" id="id" value="@orderItem("id").value" type="text" disabled/>
+    <br>
+    Order id: <input name="order" id="order" value="@orderItem("order").value" type="text" disabled/>
+    <br>
+    Product name: <input name="name" id="name" value="@orderItem("name").value" type="text" disabled/>
+    <br>
+    Product description: <input name="description" id="description" value="@orderItem("description").value" type="text" disabled/>
+    <br>
+    Category name: <input name="categoryName" id="categoryName" value="@orderItem("categoryName").value" type="text" disabled/>
+    <br>
+    Brand name: <input name="brandName" id="brandName" value="@orderItem("brandName").value" type="text" disabled/>
+    <br>
+    Image url: <input name="imageUrl" id="imageUrl" value="@orderItem("imageUrl").value" type="text" disabled/>
+    <br>
+    @inputText(orderItem("quantity"))
+    @inputText(orderItem("priceUnit"))
+    <div class="buttons">
+        <input type="submit" value="update order item"/>
+    </div>
+    <a href="@controllers.routes.OrderController.getOrderWithId(orderItem("order").value.get.toInt)">Back to order</a>
+    <br>
+    <a href="@controllers.routes.OrderItemController.getAllOrderItems()">Back to all orderItems</a>
+
+}

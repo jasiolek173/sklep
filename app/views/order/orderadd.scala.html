@@ -1,0 +1,46 @@
+@(order: Form[OrderFormData],
+        accounts: Seq[Account],
+        shipmentTypes: Seq[ShipmentType],
+        paymentTypes: Seq[PaymentType],
+        coupon: Seq[Coupon])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.OrderController.createOrder) {
+    @helper.CSRF.formField
+
+    <p>user:
+        <select name="account" id="account">
+        @for(a <- accounts) {
+            <option value="@a.id">@a.login</option>
+        }
+        </select>
+    </p>
+    <p> shipment type:
+        <select name="shipmentType" id="shipmentType">
+        @for(s <- shipmentTypes) {
+            <option value="@s.id">@s.name</option>
+        }
+        </select>
+    </p>
+    <p> payment types:
+        <select name="paymentType" id="paymentType">
+        @for(p <- paymentTypes) {
+            <option value="@p.id">@p.name</option>
+        }
+        </select>
+    </p>
+    <p> copon:
+        <select name="coupon" id="coupon">
+        @for(c <- coupon) {
+            <option value="@c.id">@c.name</option>
+        }
+        </select>
+    </p>
+    <div class="buttons">
+        <input type="submit" value="Add Order"/>
+    </div>
+    <a href="@controllers.routes.OrderController.getAllOrders()">Back to all orders</a>
+}

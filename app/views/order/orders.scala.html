@@ -1,0 +1,27 @@
+@(orders: Seq[Order])
+<a href="@controllers.routes.OrderController.createOrderForm()">Add new order</a>
+<table>
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">client id</th>
+        <th style="padding: 15px;">shipment type id</th>
+        <th style="padding: 15px;">payment type id</th>
+        <th style="padding: 15px;">coupon</th>
+        <th style="padding: 15px;">actions</th>
+    </tr>
+    @for(o <- orders) {
+        <tr>
+            <td style="padding: 15px;">@o.id</td>
+            <td style="padding: 15px;">@o.account</td>
+            <td style="padding: 15px;">@o.shipmentType</td>
+            <td style="padding: 15px;">@o.paymentType</td>
+            <td style="padding: 15px;">@o.coupon</td>
+            <td style="padding: 15px;">
+                <a href="@controllers.routes.OrderController.getOrderWithId(o.id)">CHECK</a>
+                <a href="@controllers.routes.OrderController.updateOrderForm(o.id)">EDIT</a>
+                <a href="@controllers.routes.OrderController.removeOrderWithId(o.id)">REMOVE</a>
+            </td>
+
+        </tr>
+    }
+</table>

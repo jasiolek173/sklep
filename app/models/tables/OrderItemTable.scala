@@ -1,24 +1,30 @@
 package models.tables
 
-import models.{OrderItem, Payment}
+import models.OrderItem
 import slick.jdbc.SQLiteProfile.api._
 
 class OrderItemTable(tag: Tag) extends Table[OrderItem](tag, "order_item") {
   val orderQuery = TableQuery[OrderTable]
-  val historicalProductQuery = TableQuery[HistoricalProductTable]
 
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
   def order = column[Int]("order")
 
-  def product=column[Int]("product")
+  def name = column[String]("name")
 
-  def quantity=column[Int]("quantity")
+  def description = column[String]("description")
 
-  def priceUnit= column[BigDecimal]("price_unit")
+  def category_name = column[String]("category_name")
+
+  def brand_name = column[String]("brand_name")
+
+  def image_url = column[String]("image_url")
+
+  def quantity = column[Int]("quantity")
+
+  def priceUnit = column[BigDecimal]("price_unit")
 
   def order_fk = foreignKey("order_fk", order, orderQuery)(_.id)
-  def historical_product_fk = foreignKey("historical_product_fk", product, historicalProductQuery)(_.id)
 
-  def * = (id,order,product,quantity,priceUnit) <> ((OrderItem.apply _).tupled, OrderItem.unapply)
+  def * = (id, order, name, description, category_name, brand_name, image_url, quantity, priceUnit) <> ((OrderItem.apply _).tupled, OrderItem.unapply)
 }

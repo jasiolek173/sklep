@@ -3,100 +3,110 @@
 # This file defines all application routes (Higher priority routes first)
 
 # An example controller showing a sample home page
-GET           /                                     controllers.HomeController.index
+GET         /                                     controllers.HomeController.index
 
 #account
-GET           /get_account/:id                      controllers.AccountController.getAccountWithId(id: Int)
-POST          /create_account                       controllers.AccountController.createAccount
-POST          /update_account                       controllers.AccountController.updateAccount
-GET           /get_accounts                         controllers.AccountController.getAllAccounts
-GET           /delete_account/:id                   controllers.AccountController.removeAccountWithId(id:Int)
-GET           /add_account_form                     controllers.AccountController.createAccountForm
-GET           /update_account_form/:id              controllers.AccountController.updateAccountForm(id:Int)
+GET         /get_account/:id                      controllers.AccountController.getAccountWithId(id: Int)
+POST        /create_account                       controllers.AccountController.createAccount
+POST        /update_account                       controllers.AccountController.updateAccount
+GET         /get_accounts                         controllers.AccountController.getAllAccounts
+GET         /delete_account/:id                   controllers.AccountController.removeAccountWithId(id:Int)
+GET         /add_account_form                     controllers.AccountController.createAccountForm
+GET         /update_account_form/:id              controllers.AccountController.updateAccountForm(id:Int)
 
 #Product
-GET           /get_product/:id                      controllers.ProductController.getProductWithId(id: Int)
-POST          /create_product                       controllers.ProductController.createProduct
-POST          /update_product                       controllers.ProductController.updateProduct
-GET           /get_products                         controllers.ProductController.getAllProducts
-GET           /delete_product/:id                   controllers.ProductController.removeProductWithId(id: Int)
-GET           /add_product_form                     controllers.ProductController.createProductForm
-GET           /update_product_form/:id              controllers.ProductController.updateProductForm(id:Int)
+GET         /get_product/:id                      controllers.ProductController.getProductWithId(id: Int)
+POST        /create_product                       controllers.ProductController.createProduct
+POST        /update_product                       controllers.ProductController.updateProduct
+GET         /get_products                         controllers.ProductController.getAllProducts
+GET         /delete_product/:id                   controllers.ProductController.removeProductWithId(id: Int)
+GET         /add_product_form                     controllers.ProductController.createProductForm
+GET         /update_product_form/:id              controllers.ProductController.updateProductForm(id:Int)
 
 #brand
-GET           /get_brand/:id                        controllers.BrandController.getBrandWithId(id:Int)
-POST          /create_brand                         controllers.BrandController.createBrand
-POST          /update_brand                         controllers.BrandController.updateBrand
-GET           /get_brands                           controllers.BrandController.getAllBrands
-GET           /delete_brand/:id                     controllers.BrandController.removeBrandWithId(id: Int)
-GET           /create_brand_form                    controllers.BrandController.createBrandForm
-GET           /update_brand_form/:id                controllers.BrandController.updateBrandForm(id:Int)
+GET         /get_brand/:id                        controllers.BrandController.getBrandWithId(id:Int)
+POST        /create_brand                         controllers.BrandController.createBrand
+POST        /update_brand                         controllers.BrandController.updateBrand
+GET         /get_brands                           controllers.BrandController.getAllBrands
+GET         /delete_brand/:id                     controllers.BrandController.removeBrandWithId(id: Int)
+GET         /create_brand_form                    controllers.BrandController.createBrandForm
+GET         /update_brand_form/:id                controllers.BrandController.updateBrandForm(id:Int)
 
 #category
-GET           /get_category/:id                     controllers.CategoryController.getCategoryWithId(id: Int)
-POST          /create_category                      controllers.CategoryController.createCategory
-POST          /update_category                      controllers.CategoryController.updateCategory
-GET           /get_categories                       controllers.CategoryController.getAllCategories
-GET           /delete_category/:id                  controllers.CategoryController.removeCategoryWithId(id: Int)
-GET           /create_category_form                 controllers.CategoryController.createCategoryForm
-GET           /update_category_form/:id             controllers.CategoryController.updateCategoryForm(id:Int)
+GET         /get_category/:id                     controllers.CategoryController.getCategoryWithId(id: Int)
+POST        /create_category                      controllers.CategoryController.createCategory
+POST        /update_category                      controllers.CategoryController.updateCategory
+GET         /get_categories                       controllers.CategoryController.getAllCategories
+GET         /delete_category/:id                  controllers.CategoryController.removeCategoryWithId(id: Int)
+GET         /create_category_form                 controllers.CategoryController.createCategoryForm
+GET         /update_category_form/:id             controllers.CategoryController.updateCategoryForm(id:Int)
 
 #comment
-GET           /get_comment/:id                      controllers.CommentController.getCommentWithId(id: Int)
-POST          /create_comment                       controllers.CommentController.createComment
-POST          /update_comment                       controllers.CommentController.updateComment
-GET           /get_comments                         controllers.CommentController.getAllComments
-GET           /delete_comment/:id                   controllers.CommentController.removeCommentWithId(id: Int)
-GET           /create_comment_form                  controllers.CommentController.createCommentForm
-GET           /update_comment_form/:id              controllers.CommentController.updateCommentForm(id: Int)
+GET         /get_comment/:id                      controllers.CommentController.getCommentWithId(id: Int)
+POST        /create_comment                       controllers.CommentController.createComment
+POST        /update_comment                       controllers.CommentController.updateComment
+GET         /get_comments                         controllers.CommentController.getAllComments
+GET         /delete_comment/:id                   controllers.CommentController.removeCommentWithId(id: Int)
+GET         /create_comment_form                  controllers.CommentController.createCommentForm
+GET         /update_comment_form/:id              controllers.CommentController.updateCommentForm(id: Int)
 
 #coupon
-GET           /get_coupon/:id                       controllers.CouponController.getCouponWithId(id: Int)
-POST          /create_coupon                        controllers.CouponController.createCoupon
-POST          /update_coupon                        controllers.CouponController.updateCoupon
-GET           /get_coupons                          controllers.CouponController.getAllCoupons
-GET           /delete_coupon/:id                    controllers.CouponController.removeCouponWithId(id: Int)
-GET           /create_coupon_form                   controllers.CouponController.createCouponForm
-GET           /update_coupon_form/:id               controllers.CouponController.updateCouponForm(id: Int)
+GET         /get_coupon/:id                       controllers.CouponController.getCouponWithId(id: Int)
+POST        /create_coupon                        controllers.CouponController.createCoupon
+POST        /update_coupon                        controllers.CouponController.updateCoupon
+GET         /get_coupons                          controllers.CouponController.getAllCoupons
+GET         /delete_coupon/:id                    controllers.CouponController.removeCouponWithId(id: Int)
+GET         /create_coupon_form                   controllers.CouponController.createCouponForm
+GET         /update_coupon_form/:id               controllers.CouponController.updateCouponForm(id: Int)
 
 #order
-GET           /orders/:id                           controllers.OrderController.getOrderWithId(id: Long)
-POST          /orders                               controllers.OrderController.createOrder
-GET           /orders                               controllers.OrderController.getAllOrders
-DELETE        /orders/:id                           controllers.OrderController.removeOrderWithId(id: Long)
-POST          /ordershandle                         controllers.OrderController.createOrderForm
-PUT           /ordershandle                         controllers.OrderController.updateOrderForm
+GET         /get_order/:id                        controllers.OrderController.getOrderWithId(id: Int)
+POST        /create_order                         controllers.OrderController.createOrder
+POST        /update_order                         controllers.OrderController.updateOrder
+GET         /get_orders                           controllers.OrderController.getAllOrders
+GET         /delete_order/:id                     controllers.OrderController.removeOrderWithId(id: Int)
+GET         /create_order_form                    controllers.OrderController.createOrderForm
+GET         /update_order_form/:id                controllers.OrderController.updateOrderForm(id: Int)
+
+#order item
+GET         /get_order_item/:id                   controllers.OrderItemController.getOrderItemWithId(id: Int)
+POST        /create_order_item                    controllers.OrderItemController.createOrderItem
+POST        /update_order_item                    controllers.OrderItemController.updateOrderItem
+GET         /get_order_items                      controllers.OrderItemController.getAllOrderItems
+GET         /delete_order_item/:id                controllers.OrderItemController.removeOrderItemWithId(id: Int)
+GET         /create_order_item_form/:id           controllers.OrderItemController.createOrderItemForm(id:Int)
+GET         /update_order_item_form/:id           controllers.OrderItemController.updateOrderItemForm(id: Int)
 
 #payment
-GET           /get_payment/:id                      controllers.PaymentController.getPaymentWithId(id: Int)
-POST          /create_payment                       controllers.PaymentController.createPayment
-POST          /update_payment                       controllers.PaymentController.updatePayment
-GET           /get_payments                         controllers.PaymentController.getAllPayments
-GET           /delete_payment/:id                   controllers.PaymentController.removePaymentWithId(id: Int)
-GET           /create_payment_form                  controllers.PaymentController.createPaymentForm
-GET           /update_payment_form/:id              controllers.PaymentController.updatePaymentForm(id: Int)
+GET         /get_payment/:id                      controllers.PaymentController.getPaymentWithId(id: Int)
+POST        /create_payment                       controllers.PaymentController.createPayment
+POST        /update_payment                       controllers.PaymentController.updatePayment
+GET         /get_payments                         controllers.PaymentController.getAllPayments
+GET         /delete_payment/:id                   controllers.PaymentController.removePaymentWithId(id: Int)
+GET         /create_payment_form                  controllers.PaymentController.createPaymentForm
+GET         /update_payment_form/:id              controllers.PaymentController.updatePaymentForm(id: Int)
 
 #shipmentType
-GET           /get_shipment_type/:id                controllers.ShipmentTypeController.getShipmentTypeWithId(id: Int)
-POST          /create_shipment_type                 controllers.ShipmentTypeController.createShipmentType
-POST          /update_shipment_type                 controllers.ShipmentTypeController.updateShipmentType
-GET           /get_shipment_types                   controllers.ShipmentTypeController.getAllShipmentTypes
-GET           /delete_shipment_type/:id             controllers.ShipmentTypeController.removeShipmentTypeWithId(id: Int)
-GET           /create_shipment_type_form            controllers.ShipmentTypeController.createShipmentTypeForm
-GET           /update_shipment_type_form/:id        controllers.ShipmentTypeController.updateShipmentTypeForm(id: Int)
+GET         /get_shipment_type/:id                controllers.ShipmentTypeController.getShipmentTypeWithId(id: Int)
+POST        /create_shipment_type                 controllers.ShipmentTypeController.createShipmentType
+POST        /update_shipment_type                 controllers.ShipmentTypeController.updateShipmentType
+GET         /get_shipment_types                   controllers.ShipmentTypeController.getAllShipmentTypes
+GET         /delete_shipment_type/:id             controllers.ShipmentTypeController.removeShipmentTypeWithId(id: Int)
+GET         /create_shipment_type_form            controllers.ShipmentTypeController.createShipmentTypeForm
+GET         /update_shipment_type_form/:id        controllers.ShipmentTypeController.updateShipmentTypeForm(id: Int)
 
 #paymentType
-GET           /get_payment_type/:id                 controllers.PaymentTypeController.getPaymentTypeWithId(id: Int)
-POST          /create_payment_type                  controllers.PaymentTypeController.createPaymentType
-POST          /update_payment_type                  controllers.PaymentTypeController.updatePaymentType
-GET           /get_payment_types                    controllers.PaymentTypeController.getAllPaymentTypes
-GET           /delete_payment_types/:id             controllers.PaymentTypeController.removePaymentTypeWithId(id:Int)
-GET           /create_payment_type_form             controllers.PaymentTypeController.createPaymentTypeForm()
-GET           /update_payment_type_form/:id         controllers.PaymentTypeController.updatePaymentTypeForm(id: Int)
+GET         /get_payment_type/:id                 controllers.PaymentTypeController.getPaymentTypeWithId(id: Int)
+POST        /create_payment_type                  controllers.PaymentTypeController.createPaymentType
+POST        /update_payment_type                  controllers.PaymentTypeController.updatePaymentType
+GET         /get_payment_types                    controllers.PaymentTypeController.getAllPaymentTypes
+GET         /delete_payment_types/:id             controllers.PaymentTypeController.removePaymentTypeWithId(id:Int)
+GET         /create_payment_type_form             controllers.PaymentTypeController.createPaymentTypeForm()
+GET         /update_payment_type_form/:id         controllers.PaymentTypeController.updatePaymentTypeForm(id: Int)
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET           /assets/*file                         controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file                         controllers.Assets.versioned(path="/public", file: Asset)
 
 
 

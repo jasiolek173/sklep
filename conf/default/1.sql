@@ -30,7 +30,6 @@ CREATE TABLE "comment"
     "id"      INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "owner"   VARCHAR NOT NULL,
     "content" VARCHAR NOT NULL,
-    "created" DATE    NOT NULL,
     "product" INTEGER NOT NULL,
     FOREIGN KEY (product) references product (id)
 )
@@ -86,24 +85,17 @@ CREATE TABLE "order"
     FOREIGN KEY (coupon) references coupon (id)
 )
 
-CREATE TABLE "historical_product"
-(
-    "id"            INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "name"          VARCHAR NOT NULL,
-    "description"   TEXT    NOT NULL,
-    "category_name" VARCHAR NOT NULL,
-    "brand_name"    VARCHAR NOT NULL,
-    "img_url"       VARCHAR
-)
-
 CREATE TABLE "order_item"
 (
     "id"         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "order"      INTEGER NOT NULL,
-    "product"    INTEGER NOT NULL,
+    "name"          VARCHAR NOT NULL,
+    "description"   VARCHAR NOT NULL,
+    "category_name" VARCHAR NOT NULL,
+    "brand_name"    VARCHAR NOT NULL,
+    "img_url"       VARCHAR,
     "quantity"   INTEGER NOT NULL,
     "price_unit" MONEY   NOT NULL,
-    FOREIGN KEY (product) references historical_product (id),
     FOREIGN KEY ("order") references [order] (id)
 )
     # --- !Downs
@@ -117,5 +109,4 @@ DROP TABLE "comment"
 DROP TABLE "account"
 DROP TABLE "product"
 DROP TABLE "category"
-DROP TABLE "historical_product"
 DROP TABLE "order_item"

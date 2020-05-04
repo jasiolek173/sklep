@@ -1,0 +1,54 @@
+@(order: Form[Order],
+        shipmentTypes: Seq[ShipmentType],
+        paymentTypes: Seq[PaymentType],
+        coupon: Seq[Coupon])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.OrderController.updateOrder()) {
+    @helper.CSRF.formField
+    <p>ORDER ID: @order("id").value </p>
+    <p>Client ID: @order("account").value </p>
+    <input name="id" id="id" value="@order("id").value" type="hidden" />
+    <input name="account" id="account" value="@order("account").value" type="hidden"/>
+    <p> shipment type:
+        <select name="shipmentType" id="shipmentType">
+        @for(s <- shipmentTypes) {
+            @if(s.id.toString == order("shipmentType").value.getOrElse(0)) {
+                <option value="@s.id" selected>@s.name</option>
+            } else {
+                <option value="@s.id">@s.name</option>
+            }
+        }
+        </select>
+    </p>
+    <p> payment type:
+        <select name="paymentType" id="paymentType">
+        @for(p <- paymentTypes) {
+            @if(p.id.toString == order("paymentType").value.getOrElse(0)) {
+                <option value="@p.id" selected>@p.name</option>
+            } else {
+                <option value="@p.id">@p.name</option>
+            }
+        }
+        </select>
+    </p>
+    <p> coupon:
+        <select name="coupon" id="coupon">
+        @for(c <- coupon) {
+            @if(c.id.toString == order("coupon").value.getOrElse(0)) {
+                <option value="@c.id" selected>@c.name</option>
+            } else {
+                <option value="@c.id">@c.name</option>
+            }
+        }
+        </select>
+    </p>
+
+    <div class="buttons">
+        <input type="submit" value="Update Order"/>
+    </div>
+    <a href="@controllers.routes.OrderController.getAllOrders()">Back to all orders</a>
+}

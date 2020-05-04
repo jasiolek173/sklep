@@ -1,0 +1,29 @@
+@(o: OrderItem)
+<table>
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">order id</th>
+        <th style="padding: 15px;">product name</th>
+        <th style="padding: 15px;">product description</th>
+        <th style="padding: 15px;">product category name</th>
+        <th style="padding: 15px;">product brand name</th>
+        <th style="padding: 15px;">product image url</th>
+        <th style="padding: 15px;">product quantity</th>
+        <th style="padding: 15px;">product unit price</th>
+    </tr>
+    <tr>
+        <td style="padding: 15px;">@o.id</td>
+        <td style="padding: 15px;">@o.order</td>
+        <td style="padding: 15px;">@o.name</td>
+        <td style="padding: 15px;">@o.description</td>
+        <td style="padding: 15px;">@o.brandName</td>
+        <td style="padding: 15px;">@o.categoryName</td>
+        <td style="padding: 15px;">@o.imageUrl</td>
+        <td style="padding: 15px;">@o.quantity</td>
+        <td style="padding: 15px;">@o.priceUnit</td>
+        <td style="padding: 15px;">
+        </td>
+    </tr>
+</table>
+<a href="@controllers.routes.OrderItemController.getAllOrderItems()">Back to all order items</a>
+<a href="@controllers.routes.OrderController.getOrderWithId(o.order)">Back to order</a>

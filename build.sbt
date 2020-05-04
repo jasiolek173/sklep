@@ -18,6 +18,6 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick-evolutions" % "4.0.2"
 )
 
-unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  
+unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )
 
       

@@ -13,11 +13,11 @@ class OrderTable(tag: Tag) extends Table[Order](tag, "order") {
 
   def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
-  def account = column[Int]("account")
+  def account = column[Int]("client")
 
-  def shipmentType = column[Int]("shipment_type")
+  def shipmentType = column[Int]("shipment")
 
-  def paymentType = column[Int]("payment_type")
+  def paymentType = column[Int]("payment")
 
   def coupon = column[Int]("coupon")
 

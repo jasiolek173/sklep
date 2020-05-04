@@ -1,0 +1,32 @@
+@(orderItem: Form[AddOrderItemFormData], products: Seq[Product], orders: Seq[Order], orderId: Int)(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(routes.OrderItemController.createOrderItem) {
+    @helper.CSRF.formField
+    <p> order id
+        <select name="order" id="order">
+        @for(o <- orders) {
+            @if(o.id == orderId) {
+                <option value="@o.id" selected>@o.id</option>
+            } else {
+                <option value="@o.id">@o.id</option>
+            }
+        }
+        </select>
+    </p>
+    <select name="product" id="product">
+    @for(p <- products) {
+        <option value="@p.id">@p.name</option>
+    }
+    </select>
+    @inputText(orderItem("quantity"))
+    <div class="buttons">
+        <input type="submit" value="Add order item"/>
+    </div>
+}
+<a href="@controllers.routes.OrderController.getOrderWithId(orderId)">Back to order</a>
+<br>
+<a href="@controllers.routes.OrderItemController.getAllOrderItems()">Back to all order items</a>

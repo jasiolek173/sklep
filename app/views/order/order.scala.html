@@ -1,0 +1,41 @@
+@(order: Order, shipment: ShipmentType, client: Account, payment: PaymentType, coupon: Coupon, orderItems: Seq[OrderItem])
+<p>Order ID:@order.id</p>
+<p>Shipment type: @shipment.name</p>
+<p>User: @client.login</p>
+<p>Payment type: @payment.name</p>
+<p>Coupon: @coupon.name</p>
+
+<a href="@controllers.routes.OrderController.getAllOrders()">Back to all orders</a>
+<a href="@controllers.routes.OrderController.updateOrderForm(order.id)">Edit order</a>
+<a href="@controllers.routes.OrderController.removeOrderWithId(order.id)">Remove order</a>
+
+<H1>Products: </H1>
+<a href="@controllers.routes.OrderItemController.createOrderItemForm(order.id)">Add new order item</a>
+<table>
+    <tr>
+        <th style="padding: 15px;">ID</th>
+        <th style="padding: 15px;">name</th>
+        <th style="padding: 15px;">description</th>
+        <th style="padding: 15px;">category</th>
+        <th style="padding: 15px;">brand</th>
+        <th style="padding: 15px;">image URL</th>
+        <th style="padding: 15px;">quantity</th>
+        <th style="padding: 15px;">unit price</th>
+    </tr>
+    @for(o <- orderItems) {
+        <tr>
+            <td style="padding: 15px;">@o.id</td>
+            <td style="padding: 15px;">@o.name</td>
+            <td style="padding: 15px;">@o.description</td>
+            <td style="padding: 15px;">@o.categoryName</td>
+            <td style="padding: 15px;">@o.brandName</td>
+            <td style="padding: 15px;">@o.imageUrl</td>
+            <td style="padding: 15px;">@o.quantity</td>
+            <td style="padding: 15px;">@o.priceUnit</td>
+            <td style="padding: 15px;">
+                <a href="@controllers.routes.OrderItemController.updateOrderItemForm(o.id)">EDIT</a>
+                <a href="@controllers.routes.OrderItemController.removeOrderItemWithId(o.id)">REMOVE</a>
+            </td>
+        </tr>
+    }
+</table>
