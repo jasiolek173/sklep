@@ -1,10 +1,11 @@
 @(accounts: Seq[Account])
 <a href="@controllers.routes.AccountController.createAccountForm()">Add account</a>
 <table>
+    <caption>Accounts</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">login</th>
-        <th style="padding: 15px;">actions</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">login</th>
+        <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(account <- accounts) {
         <tr>

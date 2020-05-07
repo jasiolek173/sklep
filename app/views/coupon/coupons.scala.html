@@ -1,12 +1,13 @@
 @(coupons: Seq[Coupon])
 <a href="@controllers.routes.CouponController.createCouponForm()">Add Coupon</a>
 <table>
+    <caption>Coupons</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">name</th>
-        <th style="padding: 15px;">description</th>
-        <th style="padding: 15px;">percentage</th>
-        <th style="padding: 15px;">actions</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">name</th>
+        <th scope="col" style="padding: 15px;">description</th>
+        <th scope="col" style="padding: 15px;">percentage</th>
+        <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(coupon <- coupons) {
         <tr>

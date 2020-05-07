@@ -1,13 +1,14 @@
 @(orders: Seq[Order])
 <a href="@controllers.routes.OrderController.createOrderForm()">Add new order</a>
 <table>
+    <caption>Orders</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">client id</th>
-        <th style="padding: 15px;">shipment type id</th>
-        <th style="padding: 15px;">payment type id</th>
-        <th style="padding: 15px;">coupon</th>
-        <th style="padding: 15px;">actions</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">client id</th>
+        <th scope="col" style="padding: 15px;">shipment type id</th>
+        <th scope="col" style="padding: 15px;">payment type id</th>
+        <th scope="col" style="padding: 15px;">coupon</th>
+        <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(o <- orders) {
         <tr>

@@ -2,6 +2,7 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 import models.{Brand, BrandForm, UpdateBrandForm}
+import play.api.libs.json.Json
 import play.api.mvc._
 import repositories.BrandRepository
 
@@ -67,5 +68,10 @@ class BrandController @Inject()(brandRepository: BrandRepository, cc: MessagesCo
       case None =>
         Redirect(routes.CategoryController.getAllCategories())
     }
+  }
+
+  //  REST
+  def getBrand(brandId: Int): Action[AnyContent] = Action.async {
+    brandRepository.getById(brandId).map(brand => Json.toJson(brand)).map(json => Ok(json))
   }
 }

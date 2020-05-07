@@ -1,7 +1,8 @@
 package controllers
 
 import javax.inject._
-import models.{Product, ProductForm, UpdateProductForm}
+import models.{Product, ProductForm, ProductRepresentation, UpdateProductForm}
+import play.api.libs.json.Json
 import play.api.mvc._
 import repositories.{BrandRepository, CategoryRepository, ProductRepository}
 
@@ -82,6 +83,25 @@ class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo:
           case None =>
             Redirect(routes.ProductController.getAllProducts())
         }
+      )
+    )
+  }
+
+  //REST
+  def getProducts: Action[AnyContent] = Action.async {
+    productsRepo.list().map(products => Json.toJson(products)).map(json => Ok(json))
+  }
+
+  def getProductsWithCategoryId(id: Int): Action[AnyContent] = Action.async {
+    productsRepo.getByCategory(id).map(products => Json.toJson(products)).map(json => Ok(json))
+  }
+
+  def getProductRepresentationWithId(id: Int): Action[AnyContent] = Action.async {
+    productsRepo.getById(id).flatMap(product =>
+      categoryRepo.getById(product.category).flatMap(category =>
+        brandRepo.getById(product.brand).map(brand =>
+          Json.toJson(ProductRepresentation(product.name, product.description, category.name, brand.name, product.price, product.imageUrl))
+        ).map(json => Ok(json))
       )
     )
   }

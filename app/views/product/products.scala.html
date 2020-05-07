@@ -1,15 +1,16 @@
 @(products: Seq[Product])
 <a href="@controllers.routes.ProductController.createProductForm()">ADD NEW PRODUCT</a>
 <table style="width: 100%">
+    <caption>Products</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">name</th>
-        <th style="padding: 15px;">description</th>
-        <th style="padding: 15px;">price</th>
-        <th style="padding: 15px;">image url</th>
-        <th style="padding: 15px;">brand id</th>
-        <th style="padding: 15px;">category id</th>
-        <th style="padding: 15px;">actions</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">name</th>
+        <th scope="col" style="padding: 15px;">description</th>
+        <th scope="col" style="padding: 15px;">price</th>
+        <th scope="col" style="padding: 15px;">image url</th>
+        <th scope="col" style="padding: 15px;">brand id</th>
+        <th scope="col" style="padding: 15px;">category id</th>
+        <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(product <- products) {
         <tr>

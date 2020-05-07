@@ -9,6 +9,8 @@ case class Product(id: Int, name: String, description: String, category: Int, br
 
 case class ProductFormData(name: String, description: String, category: Int, brand: Int, price: BigDecimal, imageUrl: String)
 
+case class ProductRepresentation(name: String, description: String, category: String, brand: String, price: BigDecimal, imageUrl: String)
+
 object ProductForm {
   val form: Form[ProductFormData] = Form {
     mapping(
@@ -38,4 +40,8 @@ object UpdateProductForm {
 
 object Product {
   implicit val productFormat = Json.format[Product]
+}
+
+object ProductRepresentation {
+  implicit val productFormat = Json.format[ProductRepresentation]
 }

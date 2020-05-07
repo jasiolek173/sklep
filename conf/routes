@@ -23,6 +23,11 @@ GET         /delete_product/:id                   controllers.ProductController.
 GET         /add_product_form                     controllers.ProductController.createProductForm
 GET         /update_product_form/:id              controllers.ProductController.updateProductForm(id:Int)
 
+#
+GET         /product                              controllers.ProductController.getProducts
+GET         /category/:id/product                 controllers.ProductController.getProductsWithCategoryId(id:Int)
+GET         /product/:id                          controllers.ProductController.getProductRepresentationWithId(id:Int)
+
 #brand
 GET         /get_brand/:id                        controllers.BrandController.getBrandWithId(id:Int)
 POST        /create_brand                         controllers.BrandController.createBrand
@@ -31,6 +36,9 @@ GET         /get_brands                           controllers.BrandController.ge
 GET         /delete_brand/:id                     controllers.BrandController.removeBrandWithId(id: Int)
 GET         /create_brand_form                    controllers.BrandController.createBrandForm
 GET         /update_brand_form/:id                controllers.BrandController.updateBrandForm(id:Int)
+
+#
+GET         /brand/:id                            controllers.BrandController.getBrand(id:Int)
 
 #category
 GET         /get_category/:id                     controllers.CategoryController.getCategoryWithId(id: Int)
@@ -41,6 +49,9 @@ GET         /delete_category/:id                  controllers.CategoryController
 GET         /create_category_form                 controllers.CategoryController.createCategoryForm
 GET         /update_category_form/:id             controllers.CategoryController.updateCategoryForm(id:Int)
 
+#
+GET         /category                             controllers.CategoryController.getCategories
+
 #comment
 GET         /get_comment/:id                      controllers.CommentController.getCommentWithId(id: Int)
 POST        /create_comment                       controllers.CommentController.createComment
@@ -49,6 +60,10 @@ GET         /get_comments                         controllers.CommentController.
 GET         /delete_comment/:id                   controllers.CommentController.removeCommentWithId(id: Int)
 GET         /create_comment_form                  controllers.CommentController.createCommentForm
 GET         /update_comment_form/:id              controllers.CommentController.updateCommentForm(id: Int)
+
+#
+GET         /product/:id/comment                  controllers.CommentController.getCommentsWithProductId(id:Int)
+POST        /comment                              controllers.CommentController.createCommentFromJson
 
 #coupon
 GET         /get_coupon/:id                       controllers.CouponController.getCouponWithId(id: Int)
@@ -59,6 +74,9 @@ GET         /delete_coupon/:id                    controllers.CouponController.r
 GET         /create_coupon_form                   controllers.CouponController.createCouponForm
 GET         /update_coupon_form/:id               controllers.CouponController.updateCouponForm(id: Int)
 
+#
+
+GET         /coupon/:name                         controllers.CouponController.getCouponWithIdJson(name:String)
 #order
 GET         /get_order/:id                        controllers.OrderController.getOrderWithId(id: Int)
 POST        /create_order                         controllers.OrderController.createOrder
@@ -68,6 +86,9 @@ GET         /delete_order/:id                     controllers.OrderController.re
 GET         /create_order_form                    controllers.OrderController.createOrderForm
 GET         /update_order_form/:id                controllers.OrderController.updateOrderForm(id: Int)
 
+#
+POST        /order                                controllers.OrderController.createOrderFromJson
+
 #order item
 GET         /get_order_item/:id                   controllers.OrderItemController.getOrderItemWithId(id: Int)
 POST        /create_order_item                    controllers.OrderItemController.createOrderItem
@@ -76,6 +97,9 @@ GET         /get_order_items                      controllers.OrderItemControlle
 GET         /delete_order_item/:id                controllers.OrderItemController.removeOrderItemWithId(id: Int)
 GET         /create_order_item_form/:id           controllers.OrderItemController.createOrderItemForm(id:Int)
 GET         /update_order_item_form/:id           controllers.OrderItemController.updateOrderItemForm(id: Int)
+
+#
+POST        /order_item                           controllers.OrderItemController.createOrderItemFromJson
 
 #payment
 GET         /get_payment/:id                      controllers.PaymentController.getPaymentWithId(id: Int)
@@ -95,6 +119,10 @@ GET         /delete_shipment_type/:id             controllers.ShipmentTypeContro
 GET         /create_shipment_type_form            controllers.ShipmentTypeController.createShipmentTypeForm
 GET         /update_shipment_type_form/:id        controllers.ShipmentTypeController.updateShipmentTypeForm(id: Int)
 
+#
+
+GET         /shipment_type                        controllers.ShipmentTypeController.getShipmentTypes
+
 #paymentType
 GET         /get_payment_type/:id                 controllers.PaymentTypeController.getPaymentTypeWithId(id: Int)
 POST        /create_payment_type                  controllers.PaymentTypeController.createPaymentType
@@ -104,6 +132,9 @@ GET         /delete_payment_types/:id             controllers.PaymentTypeControl
 GET         /create_payment_type_form             controllers.PaymentTypeController.createPaymentTypeForm()
 GET         /update_payment_type_form/:id         controllers.PaymentTypeController.updatePaymentTypeForm(id: Int)
 
+#
+
+GET         /payment_type                         controllers.PaymentTypeController.getPaymentTypes
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                         controllers.Assets.versioned(path="/public", file: Asset)

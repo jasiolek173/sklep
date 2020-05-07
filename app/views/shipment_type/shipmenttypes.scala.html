@@ -1,12 +1,13 @@
 @(shipmentTypes: Seq[ShipmentType])
 <a href="@controllers.routes.ShipmentTypeController.createShipmentTypeForm()">Add shipmentType</a>
 <table>
+    <caption>Shipment types</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">name</th>
-        <th style="padding: 15px;">description</th>
-        <th style="padding: 15px;">price</th>
-        <th style="padding: 15px;">actions</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">name</th>
+        <th scope="col" style="padding: 15px;">description</th>
+        <th scope="col" style="padding: 15px;">price</th>
+        <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(shipmentType <- shipmentTypes) {
         <tr>

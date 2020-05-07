@@ -2,6 +2,7 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 import models.{ShipmentType, ShipmentTypeForm, UpdateShipmentTypeForm}
+import play.api.libs.json.Json
 import play.api.mvc._
 import repositories.ShipmentTypeRepository
 
@@ -68,4 +69,10 @@ class ShipmentTypeController @Inject()(shipmentTypeRepository: ShipmentTypeRepos
         Redirect(routes.ShipmentTypeController.getAllShipmentTypes())
     }
   }
+
+  //  REST
+  def getShipmentTypes: Action[AnyContent] = Action.async {
+    shipmentTypeRepository.list().map(types => Json.toJson(types)).map(json => Ok(json))
+  }
+
 }

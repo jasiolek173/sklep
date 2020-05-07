@@ -1,7 +1,8 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
-import models.{Comment, CommentForm, UpdateCommentForm}
+import models.{Comment, CommentForm, CommentFormData, UpdateCommentForm}
+import play.api.libs.json.Json
 import play.api.mvc._
 import repositories.{CommentRepository, ProductRepository}
 
@@ -75,5 +76,18 @@ class CommentController @Inject()(commentRepository: CommentRepository, productR
           Redirect(routes.CommentController.getAllComments())
       }
     )
+  }
+
+  //REST
+  def getCommentsWithProductId(productId: Int) = Action.async {
+    commentRepository.listByProductId(productId).map(comments => Json.toJson(comments)).map(json => Ok(json))
+  }
+
+  def createCommentFromJson(): Action[AnyContent] = Action.async { implicit request =>
+    val json = request.body.asJson.get
+    val comment = json.as[CommentFormData]
+    commentRepository.create(comment.owner, comment.content, comment.product)
+      .map(com=>Json.toJson(com))
+      .map(comment => Created(comment))
   }
 }

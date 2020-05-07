@@ -14,7 +14,7 @@ class CommentTable(tag: Tag) extends Table[Comment](tag, "comment") {
 
   def product = column[Int]("product")
 
-  def product_fk = foreignKey("product_fk", product, prod)(_.id)
+  def productFk = foreignKey("product_fk", product, prod)(_.id)
 
   def * = (id, owner, content, product) <> ((Comment.apply _).tupled, Comment.unapply)
 

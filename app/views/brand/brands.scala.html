@@ -1,10 +1,11 @@
 @(brands: Seq[Brand])
 <a href="@controllers.routes.BrandController.createBrandForm()">Add brand</a>
 <table>
+    <caption>Brands</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">name</th>
-        <th style="padding: 15px;">actions</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">name</th>
+        <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(brand <- brands) {
         <tr>

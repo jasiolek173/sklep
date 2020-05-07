@@ -2,6 +2,7 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 import models.{Category, CategoryForm, UpdateCategoryForm}
+import play.api.libs.json.Json
 import play.api.mvc._
 import repositories.CategoryRepository
 
@@ -68,5 +69,11 @@ class CategoryController @Inject()(categoryRepository: CategoryRepository, cc: M
         Redirect(routes.CategoryController.getAllCategories())
     }
   }
+
+  //  REST
+  def getCategories: Action[AnyContent] = Action.async {
+    categoryRepository.list().map(categories => Json.toJson(categories)).map(json => Ok(json))
+  }
+
 }
 

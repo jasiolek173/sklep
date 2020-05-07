@@ -36,24 +36,6 @@ class OrderRepository @Inject()(dbConfigProvider: DatabaseConfigProvider,
     order.result
   }
 
-//  def listOrderRepresentations(): Seq[OrderRepresentation] = {
-//    list().flatMap(orders => orders.map(o => orderRepresentation(o.id)))
-//  }
-//
-//  def orderRepresentation(orderId: Int): OrderRepresentation = {
-//    getById(orderId).flatMap(o =>
-//      accountRepository.getById(o.account).flatMap(client =>
-//        shipmentTypeRepository.getById(o.shipmentType).flatMap(shipment =>
-//          paymentTypeRepository.getById(o.paymentType).flatMap(payment =>
-//            couponRepository.getById(o.coupon).flatMap(coupon =>
-//              OrderRepresentation(o.id, client.login, shipment.name, payment.name, coupon.name)
-//            )
-//          )
-//        )
-//      )
-//    )
-//  }
-
   def getById(id: Int): Future[Order] = db.run {
     order.filter(_.id === id).result.head
   }

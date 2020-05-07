@@ -1,7 +1,8 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
-import models.{Order, OrderForm, UpdateOrderForm}
+import models.{Order, OrderForm, OrderFormData, UpdateOrderForm}
+import play.api.libs.json.Json
 import play.api.mvc._
 import repositories._
 
@@ -111,5 +112,14 @@ class OrderController @Inject()(categoryRepository: CategoryRepository,
         )
       )
     )
+  }
+
+
+  def createOrderFromJson(): Action[AnyContent] = Action.async { implicit request =>
+    val json = request.body.asJson.get
+    val order = json.as[OrderFormData]
+    orderRepository.create(order.shipmentType,order.account,order.paymentType,order.coupon)
+      .map(o=> Json.toJson(o))
+      .map(json=>Created(json))
   }
 }

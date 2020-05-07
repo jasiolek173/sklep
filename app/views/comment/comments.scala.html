@@ -1,12 +1,13 @@
 @(comments: Seq[Comment])
 <a href="@controllers.routes.CommentController.createCommentForm()">Add comment</a>
 <table>
+    <caption>Comments</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">owner</th>
-        <th style="padding: 15px;">content</th>
-        <th style="padding: 15px;">product ID</th>
-        <th style="padding: 15px;">actions</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">owner</th>
+        <th scope="col" style="padding: 15px;">content</th>
+        <th scope="col" style="padding: 15px;">product ID</th>
+        <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(comment <- comments) {
         <tr>

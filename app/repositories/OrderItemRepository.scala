@@ -1,7 +1,7 @@
 package repositories
 
 import javax.inject.{Inject, Singleton}
-import models.OrderItem
+import models.{OrderItem,Product}
 import models.tables.OrderItemTable
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
@@ -17,11 +17,11 @@ class OrderItemRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(im
 
   val orderItem = TableQuery[OrderItemTable]
 
-  def create(order: Int, name: String, description: String, categoryName: String, brandName: String, imageUrl: String, quantity: Int, priceUnit: BigDecimal): Future[OrderItem] = db.run {
-    (orderItem.map(c => (c.order, c.name, c.description, c.category_name, c.brand_name, c.image_url, c.quantity, c.priceUnit))
+  def create(order: Int, categoryName: String, brandName: String, quantity: Int, product:Product): Future[OrderItem] = db.run {
+    (orderItem.map(c => (c.order, c.name, c.description, c.categoryName, c.brandName, c.imageUrl, c.quantity, c.priceUnit))
       returning orderItem.map(_.id)
       into { case ((order, name, description, categoryName, brandName, imageUrl, quantity, priceUnit), id) => OrderItem(id, order, name, description, categoryName, brandName, imageUrl, quantity, priceUnit) }
-      ) += (order, name, description, categoryName, brandName, imageUrl, quantity, priceUnit)
+      ) += (order, product.name, product.description, categoryName, brandName, product.imageUrl, quantity, product.price)
   }
 
   def list(): Future[Seq[OrderItem]] = db.run {

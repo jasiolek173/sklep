@@ -1,11 +1,12 @@
 @(payments: Seq[Payment])
 <a href="@controllers.routes.PaymentController.createPaymentForm()">Add payment</a>
 <table>
+    <caption>Payments</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">amount</th>
-        <th style="padding: 15px;">order ID</th>
-        <th style="padding: 15px;">actions</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">amount</th>
+        <th scope="col" style="padding: 15px;">order ID</th>
+        <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(payment <- payments) {
         <tr>

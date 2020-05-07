@@ -1,7 +1,8 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
-import models.{AddOrderItemForm, OrderItem, UpdateOrderItemForm}
+import models.{AddOrderItemForm, AddOrderItemFormData, OrderItem, UpdateOrderItemForm}
+import play.api.libs.json.Json
 import play.api.mvc._
 import repositories._
 
@@ -48,7 +49,7 @@ class OrderItemController @Inject()(orderItemRepository: OrderItemRepository,
             val p = products.filter(_.id == orderItem.product).head
             categoryRepository.getById(p.category).flatMap(category =>
               brandRepository.getById(p.brand).flatMap(brand =>
-                orderItemRepository.create(orderItem.order, p.name, p.description, category.name, brand.name, p.imageUrl, orderItem.quantity, p.price).map { _ =>
+                orderItemRepository.create(orderItem.order, category.name, brand.name,orderItem.quantity, p).map { _ =>
                   Redirect(routes.OrderItemController.createOrderItemForm(orderItem.order)).flashing("success" -> "orderItem.created")
                 }
               )
@@ -90,5 +91,22 @@ class OrderItemController @Inject()(orderItemRepository: OrderItemRepository,
       case None =>
         Redirect(routes.OrderItemController.getAllOrderItems())
     }
+  }
+
+  //  REST
+  def createOrderItemFromJson(): Action[AnyContent] = Action { implicit request =>
+    val json = request.body.asJson.get
+    val order: List[AddOrderItemFormData] = json.as[List[AddOrderItemFormData]]
+    val o = order.map(n =>
+      productRepository.getById(n.product).flatMap(p =>
+        orderRepository.getById(n.order).flatMap(o =>
+          categoryRepository.getById(p.category).flatMap(category =>
+            brandRepository.getById(p.brand).flatMap(brand =>
+              orderItemRepository.create(o.id, category.name, brand.name, n.quantity, p))
+            )
+          )
+        )
+      )
+    Ok("Created")
   }
 }

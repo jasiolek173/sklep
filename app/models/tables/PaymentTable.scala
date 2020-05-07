@@ -12,7 +12,7 @@ class PaymentTable(tag: Tag) extends Table[Payment](tag, "payment") {
 
   def order=column[Int]("order")
 
-  def order_fk = foreignKey("order_fk", order, orderQuery)(_.id)
+  def orderFk = foreignKey("order_fk", order, orderQuery)(_.id)
 
   def * = (id, amount,order) <> ((Payment.apply _).tupled, Payment.unapply)
 }

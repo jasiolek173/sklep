@@ -1,15 +1,16 @@
 @(orderItems: Seq[OrderItem])
 <table>
+    <caption>Order items</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">order id</th>
-        <th style="padding: 15px;">product name</th>
-        <th style="padding: 15px;">product description</th>
-        <th style="padding: 15px;">product category name</th>
-        <th style="padding: 15px;">product brand name</th>
-        <th style="padding: 15px;">product image url</th>
-        <th style="padding: 15px;">product quantity</th>
-        <th style="padding: 15px;">product unit price</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">order id</th>
+        <th scope="col" style="padding: 15px;">product name</th>
+        <th scope="col" style="padding: 15px;">product description</th>
+        <th scope="col" style="padding: 15px;">product category name</th>
+        <th scope="col" style="padding: 15px;">product brand name</th>
+        <th scope="col" style="padding: 15px;">product image url</th>
+        <th scope="col" style="padding: 15px;">product quantity</th>
+        <th scope="col" style="padding: 15px;">product unit price</th>
     </tr>
     @for(o <- orderItems) {
         <tr>

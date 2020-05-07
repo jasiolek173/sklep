@@ -1,10 +1,11 @@
 @(categories: Seq[Category])
 <a href="@controllers.routes.CategoryController.createCategoryForm()">Add category</a>
 <table>
+    <caption>Categories</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">name</th>
-        <th style="padding: 15px;">actions</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">name</th>
+        <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(category <- categories) {
         <tr>

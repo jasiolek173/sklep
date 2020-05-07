@@ -28,6 +28,10 @@ class CouponRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impli
     coupon.result
   }
 
+  def getByNameOption(name: String): Future[Option[Coupon]] = db.run {
+    coupon.filter(_.name===name).result.headOption
+  }
+
   def getById(id: Int): Future[Coupon] = db.run {
     coupon.filter(_.id === id).result.head
   }

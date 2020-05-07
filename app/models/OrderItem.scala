@@ -2,6 +2,7 @@ package models
 
 import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
+import play.api.libs.json.Json
 
 case class OrderItem(id: Int, order: Int, name: String, description: String, categoryName: String, brandName: String, imageUrl: String, quantity: Int, priceUnit: BigDecimal)
 
@@ -48,4 +49,12 @@ object AddOrderItemForm {
       "quantity" -> number
     )(AddOrderItemFormData.apply)(AddOrderItemFormData.unapply)
   }
+}
+
+object AddOrderItemFormData {
+  implicit val format = Json.format[AddOrderItemFormData]
+}
+
+object OrderItem {
+  implicit val format = Json.format[OrderItem]
 }

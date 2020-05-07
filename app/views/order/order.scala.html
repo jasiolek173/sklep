@@ -12,15 +12,16 @@
 <H1>Products: </H1>
 <a href="@controllers.routes.OrderItemController.createOrderItemForm(order.id)">Add new order item</a>
 <table>
+    <caption>Order</caption>
     <tr>
-        <th style="padding: 15px;">ID</th>
-        <th style="padding: 15px;">name</th>
-        <th style="padding: 15px;">description</th>
-        <th style="padding: 15px;">category</th>
-        <th style="padding: 15px;">brand</th>
-        <th style="padding: 15px;">image URL</th>
-        <th style="padding: 15px;">quantity</th>
-        <th style="padding: 15px;">unit price</th>
+        <th scope="col" style="padding: 15px;">ID</th>
+        <th scope="col" style="padding: 15px;">name</th>
+        <th scope="col" style="padding: 15px;">description</th>
+        <th scope="col" style="padding: 15px;">category</th>
+        <th scope="col" style="padding: 15px;">brand</th>
+        <th scope="col" style="padding: 15px;">image URL</th>
+        <th scope="col" style="padding: 15px;">quantity</th>
+        <th scope="col" style="padding: 15px;">unit price</th>
     </tr>
     @for(o <- orderItems) {
         <tr>

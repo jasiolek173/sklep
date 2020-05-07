@@ -22,12 +22,12 @@ class ProductTable(tag: Tag) extends Table[Product](tag, "product") {
 
   def price = column[BigDecimal]("price")
 
-  def image_url = column[String]("img_url")
+  def imageUrl = column[String]("img_url")
 
-  def category_fk = foreignKey("cat_fk", category, cat)(_.id)
+  def categoryFk = foreignKey("cat_fk", category, cat)(_.id)
 
-  def brand_fk = foreignKey("brand_fk", brand, brandQuery)(_.id)
+  def brandFk = foreignKey("brand_fk", brand, brandQuery)(_.id)
 
-  def * = (id, name, description, category, brand, price, image_url) <> ((Product.apply _).tupled, Product.unapply)
+  def * = (id, name, description, category, brand, price, imageUrl) <> ((Product.apply _).tupled, Product.unapply)
 
 }

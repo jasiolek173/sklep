@@ -2,6 +2,7 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 import models.{PaymentType, PaymentTypeForm, UpdatePaymentTypeForm}
+import play.api.libs.json.Json
 import play.api.mvc._
 import repositories.PaymentTypeRepository
 
@@ -67,5 +68,10 @@ class PaymentTypeController @Inject()(paymentTypeRepository: PaymentTypeReposito
       case None =>
         Redirect(routes.PaymentTypeController.getAllPaymentTypes())
     }
+  }
+
+  //  REST
+  def getPaymentTypes: Action[AnyContent] = Action.async {
+    paymentTypeRepository.list().map(types => Json.toJson(types)).map(json => Ok(json))
   }
 }

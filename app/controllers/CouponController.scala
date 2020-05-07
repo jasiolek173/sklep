@@ -2,6 +2,7 @@ package controllers
 
 import javax.inject.{Inject, Singleton}
 import models.{Coupon, CouponForm, UpdateCouponForm}
+import play.api.libs.json.Json
 import play.api.mvc._
 import repositories.CouponRepository
 
@@ -67,5 +68,9 @@ class CouponController @Inject()(couponRepository: CouponRepository, cc: Message
       case None =>
         Redirect(routes.CouponController.getAllCoupons())
     }
+  }
+
+  def getCouponWithIdJson(name: String):Action[AnyContent] = Action.async {
+    couponRepository.getByNameOption(name).map(c => Json.toJson(c)).map(json => Ok(json))
   }
 }

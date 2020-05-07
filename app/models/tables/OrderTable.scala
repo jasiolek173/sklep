@@ -21,13 +21,13 @@ class OrderTable(tag: Tag) extends Table[Order](tag, "order") {
 
   def coupon = column[Int]("coupon")
 
-  def account_fk = foreignKey("account_fk", account, acc)(_.id)
+  def accountFk = foreignKey("account_fk", account, acc)(_.id)
 
-  def shipment_type_fk = foreignKey("shipment_type_fk", shipmentType, ship)(_.id)
+  def shipmentTypeFk = foreignKey("shipment_type_fk", shipmentType, ship)(_.id)
 
-  def payment_type_fk = foreignKey("payment_type_fk", paymentType, paymentTypeTable)(_.id)
+  def paymentTypeFk = foreignKey("payment_type_fk", paymentType, paymentTypeTable)(_.id)
 
-  def coupon_fk = foreignKey("coupon_fk", coupon, couponTable)(_.id)
+  def couponFk = foreignKey("coupon_fk", coupon, couponTable)(_.id)
 
   def * = (id, account, shipmentType, paymentType, coupon) <> ((Order.apply _).tupled, Order.unapply)
 

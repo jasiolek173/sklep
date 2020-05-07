@@ -33,3 +33,7 @@ object Comment {
   implicit val commentFormat = Json.format[Comment]
 }
 
+object CommentFormData {
+  implicit val commentFormat = Json.format[CommentFormData]
+}
+
