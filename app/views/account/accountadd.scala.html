@@ -6,8 +6,12 @@
 
 @form(routes.AccountController.createAccount) {
     @helper.CSRF.formField
-    @inputText(account("login"))
-    @inputPassword(account("password"))
+    @inputText(account("email"))
+    @inputText(account("firstName"))
+    @inputText(account("lastName"))
+    @inputText(account("providerId"))
+    @inputText(account("providerKey"))
+
     <div class="buttons">
         <input type="submit" value="Add Account"/>
     </div>

@@ -4,13 +4,21 @@
     <caption>Accounts</caption>
     <tr>
         <th scope="col" style="padding: 15px;">ID</th>
-        <th scope="col" style="padding: 15px;">login</th>
+        <th scope="col" style="padding: 15px;">email</th>
+        <th scope="col" style="padding: 15px;">first name</th>
+        <th scope="col" style="padding: 15px;">last name</th>
+        <th scope="col" style="padding: 15px;">provider id</th>
+        <th scope="col" style="padding: 15px;">provider key</th>
         <th scope="col" style="padding: 15px;">actions</th>
     </tr>
     @for(account <- accounts) {
         <tr>
             <td style="padding: 15px;">@account.id</td>
-            <td style="padding: 15px;">@account.login</td>
+            <td style="padding: 15px;">@account.email</td>
+            <td style="padding: 15px;">@account.firstName</td>
+            <td style="padding: 15px;">@account.lastName</td>
+            <td style="padding: 15px;">@account.providerId</td>
+            <td style="padding: 15px;">@account.providerKey</td>
             <td style="padding: 15px;">
                 <a href="@controllers.routes.AccountController.getAccountWithId(account.id)">CHECK</a>
                 <a href="@controllers.routes.AccountController.updateAccountForm(account.id)">EDIT</a>

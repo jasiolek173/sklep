@@ -1,15 +1,17 @@
 @(account: Form[Account])(implicit request: MessagesRequestHeader, flash: Flash)
 
-@import helper._
+    @import helper._
 
 @flash.get("success").getOrElse("")
 
 @form(routes.AccountController.updateAccount()) {
     @helper.CSRF.formField
     <input name="id" id="id" value="@account("id").value" type="hidden" />
-    @inputText(account("login"))
-    @inputPassword(account("password"))
-
+    @inputText(account("email"))
+    @inputText(account("firstName"))
+    @inputText(account("lastName"))
+    @inputText(account("providerId"))
+    @inputText(account("providerKey"))
     <div class="buttons">
         <input type="submit" value="Update Account"/>
     </div>

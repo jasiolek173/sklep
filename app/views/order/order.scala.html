@@ -1,7 +1,7 @@
 @(order: Order, shipment: ShipmentType, client: Account, payment: PaymentType, coupon: Coupon, orderItems: Seq[OrderItem])
 <p>Order ID:@order.id</p>
 <p>Shipment type: @shipment.name</p>
-<p>User: @client.login</p>
+<p>User: @client.email</p>
 <p>Payment type: @payment.name</p>
 <p>Coupon: @coupon.name</p>
 

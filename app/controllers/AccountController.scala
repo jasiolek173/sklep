@@ -33,7 +33,7 @@ class AccountController @Inject()(accountRepository: AccountRepository, cc: Mess
       )
     },
       account => {
-        accountRepository.create(account.login, account.password).map { _ =>
+        accountRepository.create(account.email, account.firstName, account.lastName, account.providerId, account.providerKey).map { _ =>
           Redirect(routes.AccountController.createAccountForm()).flashing("success" -> "account.created")
         }
       }
@@ -52,7 +52,7 @@ class AccountController @Inject()(accountRepository: AccountRepository, cc: Mess
         )
       },
       account => {
-        accountRepository.update(account.id, Account(account.id, account.login, account.password)).map { _ =>
+        accountRepository.update(account.id, Account(account.id, account.email, account.firstName, account.lastName, account.providerId, account.providerKey)).map { _ =>
           Redirect(routes.AccountController.updateAccountForm(account.id)).flashing("success" -> "account updated")
         }
       }
@@ -62,7 +62,7 @@ class AccountController @Inject()(accountRepository: AccountRepository, cc: Mess
   def updateAccountForm(id: Int): Action[AnyContent] = Action.async { implicit request: MessagesRequest[AnyContent] =>
     accountRepository.getByIdOption(id).map {
       case Some(p) =>
-        val prodForm = UpdateAccountForm.form.fill(Account(p.id, p.login, p.password))
+        val prodForm = UpdateAccountForm.form.fill(Account(p.id, p.email, p.firstName, p.lastName, p.providerId, p.providerKey))
         Ok(views.html.account.accountupdate(prodForm))
       case None =>
         Redirect(routes.AccountController.getAllAccounts())

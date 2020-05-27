@@ -16,11 +16,11 @@ class AccountRepository @Inject()(dbConfigProvider: DatabaseConfigProvider)(impl
 
   val account = TableQuery[AccountTable]
 
-  def create(login: String, password: String): Future[Account] = db.run {
-    (account.map(c => (c.login, c.password))
+  def create(email: String, firstName: String, lastName: String, providerId: String, providerKey: String): Future[Account] = db.run {
+    (account.map(c => (c.email, c.firstName, c.lastName, c.providerId, c.providerKey))
       returning account.map(_.id)
-      into { case ((login, password), id) => Account(id, login, password) }
-      ) += (login, password)
+      into { case ((email: String, firstName: String, lastName: String, providerId: String, providerKey: String), id) => Account(id, email, firstName, lastName, providerId, providerKey) }
+      ) += (email, firstName, lastName, providerId, providerKey)
   }
 
   def list(): Future[Seq[Account]] = db.run {
