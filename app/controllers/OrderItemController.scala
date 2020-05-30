@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import javax.inject.{Inject, Singleton}
 import models.{AddOrderItemForm, AddOrderItemFormData, OrderItem, UpdateOrderItemForm}
 import play.api.libs.json.Json
@@ -14,7 +15,7 @@ class OrderItemController @Inject()(orderItemRepository: OrderItemRepository,
                                     categoryRepository: CategoryRepository,
                                     brandRepository: BrandRepository,
                                     orderRepository: OrderRepository,
-                                    cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+                                    scc: DefaultSilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   def getOrderItemWithId(id: Int): Action[AnyContent] = Action.async { implicit request =>
     orderItemRepository.getByIdOption(id).map {
@@ -94,10 +95,11 @@ class OrderItemController @Inject()(orderItemRepository: OrderItemRepository,
   }
 
   //  REST
-  def createOrderItemFromJson(): Action[AnyContent] = Action { implicit request =>
+  def createOrderItemFromJson(): Action[AnyContent] = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
+
     val json = request.body.asJson.get
     val order: List[AddOrderItemFormData] = json.as[List[AddOrderItemFormData]]
-    val o = order.map(n =>
+    order.map(n =>
       productRepository.getById(n.product).flatMap(p =>
         orderRepository.getById(n.order).flatMap(o =>
           categoryRepository.getById(p.category).flatMap(category =>
@@ -107,6 +109,6 @@ class OrderItemController @Inject()(orderItemRepository: OrderItemRepository,
           )
         )
       )
-    Ok("Created")
+    Future(Ok("ok"))
   }
 }

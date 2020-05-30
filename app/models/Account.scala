@@ -1,10 +1,11 @@
 package models
 
+import com.mohiva.play.silhouette.api.Identity
 import play.api.data.Form
 import play.api.data.Forms.{mapping, _}
-import play.api.libs.json.Json
+import play.api.libs.json.{Json, OFormat}
 
-case class Account(id: Int, email: String, firstName: String, lastName: String, providerId: String, providerKey: String)
+case class Account(id: Int, email: String, firstName: String, lastName: String, providerId: String, providerKey: String) extends Identity
 
 case class AccountFormData(email: String, firstName: String, lastName: String, providerId: String, providerKey: String)
 
@@ -34,5 +35,5 @@ object UpdateAccountForm {
 }
 
 object Account {
-  implicit val accountFormat = Json.format[Account]
+  implicit val accountFormat: OFormat[Account] = Json.format[Account]
 }

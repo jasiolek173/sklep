@@ -17,6 +17,8 @@ libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick" % "4.0.2",
   "com.typesafe.play" %% "play-slick-evolutions" % "4.0.2",
 
+  "net.codingwell" %% "scala-guice" % "4.2.6",
+  "com.iheart" %% "ficus" % "1.4.7",
   "com.mohiva" %% "play-silhouette" % "7.0.0",
   "com.mohiva" %% "play-silhouette-password-bcrypt" % "7.0.0",
   "com.mohiva" %% "play-silhouette-crypto-jca" % "7.0.0",

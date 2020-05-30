@@ -1,5 +1,6 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import javax.inject._
 import models.{Product, ProductForm, ProductRepresentation, UpdateProductForm}
 import play.api.libs.json.Json
@@ -9,7 +10,9 @@ import repositories.{BrandRepository, CategoryRepository, ProductRepository}
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo: CategoryRepository, brandRepo: BrandRepository, cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+class ProductController @Inject()(productsRepo: ProductRepository, categoryRepo: CategoryRepository, brandRepo: BrandRepository,
+                                  components: SilhouetteControllerComponents
+                                 )(implicit ex: ExecutionContext) extends AbstractAuthController(components) {
 
   def getProductWithId(id: Int): Action[AnyContent] = Action.async { implicit request =>
     productsRepo.getByIdOption(id).map {

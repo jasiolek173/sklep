@@ -1,7 +1,8 @@
 package controllers
 
+import com.mohiva.play.silhouette.api.actions.SecuredRequest
 import javax.inject.{Inject, Singleton}
-import models.{Order, OrderForm, OrderFormData, UpdateOrderForm}
+import models._
 import play.api.libs.json.Json
 import play.api.mvc._
 import repositories._
@@ -16,7 +17,7 @@ class OrderController @Inject()(categoryRepository: CategoryRepository,
                                 orderRepository: OrderRepository,
                                 couponRepository: CouponRepository,
                                 orderItemRepository: OrderItemRepository,
-                                cc: MessagesControllerComponents)(implicit ec: ExecutionContext) extends MessagesAbstractController(cc) {
+                                scc: DefaultSilhouetteControllerComponents)(implicit ec: ExecutionContext) extends SilhouetteController(scc) {
 
   def getOrderWithId(id: Int): Action[AnyContent] = Action.async { implicit request =>
     orderRepository.getById(id).flatMap(order =>
@@ -56,7 +57,7 @@ class OrderController @Inject()(categoryRepository: CategoryRepository,
     )
   }
 
-  def updateOrder: Action[AnyContent] = Action.async { implicit request =>
+  def updateOrder(): Action[AnyContent] = Action.async { implicit request =>
     shipmentRepository.list().flatMap(shipmentTypes =>
       paymentRepository.list().flatMap(paymentTypes =>
         couponRepository.list().flatMap(coupons =>
@@ -115,11 +116,58 @@ class OrderController @Inject()(categoryRepository: CategoryRepository,
   }
 
 
-  def createOrderFromJson(): Action[AnyContent] = Action.async { implicit request =>
+  def createOrderFromJson(): Action[AnyContent] = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
     val json = request.body.asJson.get
-    val order = json.as[OrderFormData]
-    orderRepository.create(order.shipmentType,order.account,order.paymentType,order.coupon)
-      .map(o=> Json.toJson(o))
-      .map(json=>Created(json))
+    val order = json.as[OrderJsonFormData]
+    val user = request.identity.id
+    orderRepository.create(order.shipmentType, user, order.paymentType, order.coupon)
+      .map(o => Json.toJson(o))
+      .map(json => Created(json))
+  }
+
+  private def mapOrderToOrderRepresentation(o: Order): Future[OrderRepresentation] =
+    shipmentRepository.getById(o.shipmentType).flatMap(shipment =>
+      accountRepository.getById(o.account).flatMap(client =>
+        paymentRepository.getById(o.paymentType).flatMap(payment =>
+          couponRepository.getById(o.coupon).map(coupon =>
+            OrderRepresentation(o.id, client.firstName + " " + client.lastName, shipment.name, payment.name, coupon.name)
+          )
+        )
+      )
+    )
+
+  def mapFutures[A, B](xs: Future[Seq[A]], f: A => Future[B]): Future[Seq[B]] = {
+    for {
+      list <- xs
+      mapped <- Future.sequence(list map f)
+    } yield mapped
+  }
+
+  def getJsonAllOrders: Action[AnyContent] = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
+    val user = request.identity.id
+    val list = orderRepository.getByAccountId(user)
+    val ordersRep = mapFutures(list,mapOrderToOrderRepresentation)
+    ordersRep.map(orders => Json.toJson(orders)).map(json => Ok(json))
+  }
+
+  def getJsonOrder(orderId: Int): Action[AnyContent] = SecuredAction.async { implicit request: SecuredRequest[EnvType, AnyContent] =>
+    val user = request.identity.id
+    val order = orderRepository.getByAccountIdThenOrderId(user, orderId)
+    order.flatMap {
+      case Some(o) =>
+        orderItemRepository.listByOrderId(orderId).flatMap(items =>
+          shipmentRepository.getById(o.shipmentType).flatMap(shipment =>
+            accountRepository.getById(o.account).flatMap(client =>
+              paymentRepository.getById(o.paymentType).flatMap(payment =>
+                couponRepository.getById(o.coupon).map(coupon =>
+                  Json.toJson(OrderAllInformation(o.id, client.firstName + " " + client.lastName, shipment.name, payment.name, coupon.name, items))
+                ).map(json => Ok(json))
+              )
+            )
+          )
+        )
+      case None =>
+        Future(NotFound("Not found order with id!"))
+    }
   }
 }

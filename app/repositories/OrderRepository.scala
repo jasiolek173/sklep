@@ -1,8 +1,8 @@
 package repositories
 
 import javax.inject.{Inject, Singleton}
+import models.Order
 import models.tables._
-import models.{Order, OrderRepresentation}
 import play.api.db.slick.DatabaseConfigProvider
 import slick.jdbc.JdbcProfile
 
@@ -38,6 +38,18 @@ class OrderRepository @Inject()(dbConfigProvider: DatabaseConfigProvider,
 
   def getById(id: Int): Future[Order] = db.run {
     order.filter(_.id === id).result.head
+  }
+
+  def getByAccountId(ownerId: Int): Future[Seq[Order]] = db.run {
+    order.filter(_.account === ownerId)
+      .result
+  }
+
+  def getByAccountIdThenOrderId(ownerId: Int, orderId: Int): Future[Option[Order]] = db.run {
+    order.filter(_.account === ownerId)
+      .filter(_.id === orderId)
+      .result
+      .headOption
   }
 
   def getByIdOption(id: Int): Future[Option[Order]] = db.run {

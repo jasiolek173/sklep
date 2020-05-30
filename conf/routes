@@ -87,6 +87,8 @@ GET         /create_order_form                    controllers.OrderController.cr
 GET         /update_order_form/:id                controllers.OrderController.updateOrderForm(id: Int)
 
 #
+GET         /order                                controllers.OrderController.getJsonAllOrders
+GET         /order/:id                            controllers.OrderController.getJsonOrder(id:Int)
 POST        /order                                controllers.OrderController.createOrderFromJson
 
 #order item
@@ -135,6 +137,11 @@ GET         /update_payment_type_form/:id         controllers.PaymentTypeControl
 #
 
 GET         /payment_type                         controllers.PaymentTypeController.getPaymentTypes
+
+GET         /sign_out                             controllers.AuthenticationController.signOut
+GET         /authenticate/:provider               controllers.SocialAuthController.authenticate(provider)
+POST        /sign_up                              controllers.AuthenticationController.signUp
+POST        /sign_in                              controllers.AuthenticationController.signIn
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                         controllers.Assets.versioned(path="/public", file: Asset)
